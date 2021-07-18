@@ -1,0 +1,40 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.features-section {
+    width: 100%;
+    padding: var(--padding-medium);
+
+    @media screen and (max-width: $bp-tablet - 1) {
+        padding: var(--padding-medium) 2.5rem;
+    }
+
+    @media screen and (max-width: $bp-phone-medium) {
+        padding: var(--padding-small) 2.5rem;
+    }
+
+    &__inner {
+        width: 100%;
+        @include flex-setup($flex-flow: column, $align-items: center, $justify-content: center);
+        padding: 0 15%;
+
+        @media screen and (max-width: $bp-desktop-utility-large) {
+            padding: 0 5%;
+        }
+
+        @media screen and (max-width: $bp-phone-medium) {
+            padding: 0;
+        }
+
+        .features-section-top {
+            @include flex-setup($flex-flow: column, $align-items: center, $justify-content: center);
+            text-align: center;
+
+            .features-top-label,
+            .features-top-title,
+            .features-top-subtitle{
+                margin-bottom: var(--margin-small);
+            }
+        }
+    }
+}
