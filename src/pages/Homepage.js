@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../components/Header/Header';
-import FeaturesSection from '../components/FeaturesSection/FeaturesSection';
+import Header from '../components/layout/Header/Header';
+import FeaturesSection from '../components/homePage/FeaturesSection/FeaturesSection';
 
 function Homepage() {
     return (

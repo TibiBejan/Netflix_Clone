@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from "../Navbar/Navbar";
-import IntroBanner from "../IntroBanner/IntroBanner";
+import Navbar from '../../homePage/Navbar/Navbar';
+import IntroBanner from '../../homePage/IntroBanner/IntroBanner';
 
 function Header() {
     return (

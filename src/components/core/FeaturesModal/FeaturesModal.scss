@@ -1,0 +1,125 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.features-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+
+    &-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out;
+    }
+
+    &-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 110;
+        overflow-y: scroll;
+
+        &-inner {
+            @include flex-setup($flex-flow: column);
+            height: auto;
+            width: 80%;
+            margin: var(--margin-large) auto;
+            background-color: $black;
+        
+            .modal-content-header {
+                position: relative;
+                height: auto;
+
+                .header-navbar {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 8rem;
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-auto-flow: column;
+                    align-items: center;
+                    justify-items: center;
+                    padding: 0 2.5rem;
+                    border-bottom: 0.2rem solid rgba(255,255,255,0.8);
+                    z-index: 120;
+
+                    .header-label {
+                        grid-column: 2 / 3;
+                        font-weight: 600;
+                    }
+
+                    .header-close-button {
+                        grid-column: 3 / 4;
+                        justify-self: end;
+                    }
+                }
+
+                .header-banner {
+                    position: relative;
+                    min-height: 80vh;
+                    height: 75rem;
+                    width: 100%;
+
+                    &-background {
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+
+                        .background-image {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            filter: brightness(50%);
+                        }
+                    }
+
+                    &-content {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        padding: 0 7.5%;
+                        z-index: 115;
+
+                        .banner-content-inner {
+                            width: 100%;
+                            height: 100%;
+                            @include flex-setup($flex-flow: column, $justify-content: center);
+
+                            .banner-title {
+                                margin-bottom: var(--margin-small);
+                            }
+
+                            .banner-description {
+                                max-width: 50%;
+                            }
+                        }
+                    }
+                }
+            }
+    
+            .modal-content-body {
+                height: 80rem;
+                background-color: darkcyan;
+            }
+    
+            .modal-content-footer {
+                height: 30rem;
+                background-color: darkorange;
+            }
+        }
+    }
+}

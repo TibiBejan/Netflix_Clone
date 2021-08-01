@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerImage from '../../assets/Netflix_Banner.jpg';
+import bannerImage from '../../../assets/Netflix_Banner.jpg';
 import { IconContext } from 'react-icons/lib';
 import { BsChevronRight } from "react-icons/bs";
 import './IntroBanner.scss';
