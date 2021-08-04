@@ -1,15 +1,11 @@
 import React from 'react';
-import Header from '../components/layout/Header/Header';
-import FeaturesSection from '../components/homePage/FeaturesSection/FeaturesSection';
+import Layout from '../components/layout/Layout';
 
 function Homepage() {
     return (
-        <>
-            <Header />
-            <main>
-                <FeaturesSection />
-            </main>
-        </>
+        <Layout>
+            <h1>Homepage</h1>
+        </Layout>
     )
 }
 

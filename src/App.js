@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import LogIn from './pages/LogIn';
 import SignIn from './pages/SignIn';
+import TvShows from './pages/TvShows';
+import Movies from './pages/Movies';
 
 function App() {
   return (
@@ -12,11 +14,17 @@ function App() {
           <Route exact path='/'>
             <Homepage />
           </Route>
-          <Route exact path='/register'>
+          <Route path='/register'>
             <SignIn />
           </Route>
-          <Route exact path='/login'>
+          <Route path='/login'>
             <LogIn />
+          </Route>
+          <Route path='/tv-shows'>
+            <TvShows />
+          </Route>
+          <Route path='/movies'>
+            <Movies />
           </Route>
         </Switch>
       </Router>

@@ -1,10 +1,11 @@
 import React from 'react';
+import Layout from '../components/layout/Layout';
 
 function LogIn() {
     return (
-        <div>
-            <h1>This is log in page</h1>
-        </div>
+        <Layout>
+            <h1>Sign in</h1>
+        </Layout>
     )
 }
 

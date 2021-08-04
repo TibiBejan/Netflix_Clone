@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { ThemeProvider } from 'styled-components';
 import reportWebVitals from './reportWebVitals';
-import './styles/_reset.scss';
-import './styles/_typography.scss';
-import './styles/_globalStyles.scss';
+import GlobalStyles from './theme/GlobalStyles';
+import Theme from './theme/Theme';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={ Theme }>
+      <GlobalStyles />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

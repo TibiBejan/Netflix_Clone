@@ -1,12 +1,12 @@
 import React from 'react';
 import Layout from '../components/layout/Layout';
 
-function SignIn() {
+function TvShows() {
     return (
         <Layout>
-            <h1>Register</h1>
+           <h1>Tv Shows</h1> 
         </Layout>
     )
 }
 
-export default SignIn;
+export default TvShows;

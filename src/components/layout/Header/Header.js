@@ -1,14 +1,12 @@
 import React from 'react';
-import Navbar from '../../homePage/Navbar/Navbar';
-import IntroBanner from '../../homePage/IntroBanner/IntroBanner';
+import Navbar from '../../layout/Navbar/Navbar';
 
 function Header() {
     return (
-        <>
+        <div className="page-header">
             <Navbar />
-            <IntroBanner />
-        </>
+        </div>
     )
 }
 
-export default Header
+export default Header;
