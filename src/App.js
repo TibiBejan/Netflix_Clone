@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import LogIn from './pages/LogIn';
 import SignIn from './pages/SignIn';
-import TvShows from './pages/TvShows';
 import Movies from './pages/Movies';
+import Series from './pages/Series';
+import Kids from './pages/Kids';
 
 function App() {
   return (
@@ -20,11 +21,14 @@ function App() {
           <Route path='/login'>
             <LogIn />
           </Route>
-          <Route path='/tv-shows'>
-            <TvShows />
+          <Route path='/series'>
+            <Series />
           </Route>
           <Route path='/movies'>
             <Movies />
+          </Route>
+          <Route path='/kids'>
+            <Kids />
           </Route>
         </Switch>
       </Router>

@@ -4,9 +4,10 @@ const Theme = {
     },
     fontSizes: {
         paragraphAndLinks: '1.6rem',
+        labelLarge: '2rem',
     },
     colors: {
-        black: "#101012",
+        black: "#000",
         darkGray1: "#272727",
         darkGray2: "#464646",
         darkGray3: "#575757",
@@ -26,7 +27,7 @@ const Theme = {
         desktopLarge: 'screen and (max-width: 1920px)',
     },
     padding: {
-        paddingMobile: '3rem',
+        paddingMobile: '2.5rem',
         paddingSmall: '5rem',
         paddingMedium: '10rem',
         paddingLarge: '15rem',

@@ -1,42 +1,49 @@
-import React from 'react';
-import { IconContext } from 'react-icons';
-import { BsSearch } from "react-icons/bs";
-import NetflixLogo from '../../../assets/Netflix-Logo-White.png';
-import { NavbarWrapper, NavbarActions, NavbarLogo, NavbarSearchBar, NavbarLinks, StyledLink, NavbarProfile } from './NavbarStyles';
+import React,{ useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
+import ActionsWrapper from './ActionsWrapper';
+import LogoWrapper from './LogoWrapper';
+
+export const NavbarWrapper = styled.nav`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 12.5rem;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 0 ${props => props.theme.padding.paddingMedium};
+    transition: all 0.35s ease-in-out;
+    z-index: 150;
+
+    ${props => props.sticky && css`
+        height: 9rem;
+        background-color: rgba(0,0,0,0.95);
+    `}
+`;
 
 function Navbar() {
+
+    const [ scrollPos, setScrollPos ] = useState(0);
+
+    useEffect(() => {
+        const watchScrollPos = () => {
+            setScrollPos(window.scrollY);
+        }
+
+        window.addEventListener('scroll', watchScrollPos);
+        return () => {
+            window.removeEventListener('scroll', watchScrollPos);
+        }
+    }, []);
+
     return (
-        <NavbarWrapper>
-            <NavbarActions>
-                <NavbarLogo>
-                    <img src={ NetflixLogo } alt="Netflix Company Logo" className="background-image" />
-                </NavbarLogo>
-                <NavbarSearchBar>
-                    <label htmlFor="search" className="search-bar-label">
-                        <IconContext.Provider value={{color: '#fafafa', size: '20px'}}>
-                            <BsSearch />
-                        </IconContext.Provider>
-                    </label>
-                    <input type="text" name="search" id="search" placeholder="Search" className="search-bar-input" />
-                </NavbarSearchBar>
-            </NavbarActions>
-            <NavbarLinks>
-                <li className="links-list-item">
-                    <StyledLink to="/">Home</StyledLink>
-                </li>
-                <li className="links-list-item">
-                    <StyledLink to="/tv-shows">Tv Shows</StyledLink>
-                </li>
-                <li className="links-list-item">
-                    <StyledLink to="/movies">Movies</StyledLink>
-                </li>
-            </NavbarLinks>
-            <NavbarProfile>
-                <span className="profile-username">Profile</span>
-                <div className="profile-image">
-                    <img src="" alt="" className="background-image" />
-                </div>
-            </NavbarProfile>
+        <NavbarWrapper sticky={ scrollPos > 0 }>
+            <LogoWrapper />
+            <ActionsWrapper />
         </NavbarWrapper>
     )
 }

@@ -42,6 +42,14 @@ const GlobalStyles = createGlobalStyle`
         height: 100%;
         object-fit: cover;
     }
+
+    button {
+        outline: none;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+    }
 `;
 
 export default GlobalStyles;
