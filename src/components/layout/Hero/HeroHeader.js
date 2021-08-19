@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { HeadingOne, Label } from '../../typography/Typography';
 
 export const GenresWrapper = styled.ul`
@@ -31,6 +32,12 @@ export const GenreListItem = styled.li`
       border-radius: 1.5rem;
     }
   }
+
+  @media ${props => props.theme.breakpoints.phoneLarge} {
+    ${Label} {
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const InfoWrapper = styled.ul`
@@ -47,6 +54,10 @@ export const InfoWrapperItem = styled.li`
 
   &:first-child {
     padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
   }
 
   &:not(:last-child) {
@@ -83,12 +94,12 @@ function HeroHeader({ data }) {
                 </InfoWrapperItem>
                 <InfoWrapperItem>
                     <Label uppercase='uppercase' weight='bold'>Director:
-                        <Label weight='bold' color='darkGray3'>&nbsp;&nbsp;{data.networks[0].name}</Label>
+                        <Label weight='bold' color='darkGray3' shadow>&nbsp;&nbsp;{data.networks[0].name}</Label>
                     </Label>
                 </InfoWrapperItem>
                 <InfoWrapperItem>
                     <Label uppercase='uppercase' weight='bold'>Seasons:
-                        <Label weight='bold' color='darkGray3'>
+                        <Label weight='bold' color='darkGray3' shadow>
                             &nbsp;&nbsp;{data.number_of_seasons}
                             &nbsp;({data.number_of_episodes} Episodes)
                         </Label>
@@ -97,6 +108,10 @@ function HeroHeader({ data }) {
             </InfoWrapper>   
         </>
     )
+}
+
+HeroHeader.propTypes = {
+  data: PropTypes.object,
 }
 
 export default HeroHeader;

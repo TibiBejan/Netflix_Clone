@@ -6,6 +6,7 @@ import Background from './Background';
 import HeroHeader from './HeroHeader';
 import HeroContent from './HeroContent';
 import PopularThisWeek from './PopularThisWeek';
+import HeroSkeleton from '../../skeletons/HeroSkeleton';
 
 import { HeroWrapper, HeroContentWrapper, HeroContentInner, ContentWrapper } from './HeroStyles';
 
@@ -24,6 +25,7 @@ function Hero() {
     }
 
     useEffect(() => {
+        let didCancel = false;
         const fetchPopularTv = async () => {
             try {
                 const result = await instance.get(requests.tv.netflixOriginals);
@@ -36,29 +38,34 @@ function Hero() {
                         instance.get(`https://api.themoviedb.org/3/tv/${tvId}/aggregate_credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`),
                         instance.get(`https://api.themoviedb.org/3/tv/${tvId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`),
                         instance.get(`https://api.themoviedb.org/3/tv/${tvId}/videos?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`),
-                        instance.get(`https://api.themoviedb.org/3/tv/${tvId}/images?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`)
                     ]);
-                    setData({
+                    !didCancel && setData({
                         tvData,
                         tvCredits: tvCredits.data.cast.sort((a, b) => b.popularity - a.popularity).slice(0, 2),
                         tvDetails: tvDetails.data,
                         videos: tvVideos.data.results,
                     });
-                    setLoading(false);
                 }
             }
             catch(err) {
-                setError(err);
-                setLoading(false);
+                setError(err.response.data.status_message);
+            }
+            finally {
+                !didCancel && setLoading(false);
             }
         }
         fetchPopularTv();
+        
+        return () => {
+            didCancel = true;
+        }
     }, []);
 
     return (
         <>
-            {loading && <h1>Loading...</h1> }
-            {Object.keys(data.tvData).length !== 0 && (
+            {loading && <HeroSkeleton /> }
+            {error && <HeroSkeleton />}
+            {(!loading && !error) && (
                 <HeroWrapper>
                     <Background 
                         backdrop_path={ data.tvData.backdrop_path } 

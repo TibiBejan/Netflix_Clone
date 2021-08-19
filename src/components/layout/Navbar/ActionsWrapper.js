@@ -42,6 +42,10 @@ const ProfileButtonWrapper = styled.div`
     justify-content: center;
     column-gap: 1.5rem;
     cursor: pointer;
+
+    @media ${props => props.theme.breakpoints.tabletLarge} {
+        display: none;
+    }
 `;
 
 const ProfilePicture = styled.div`
@@ -61,7 +65,7 @@ const DropdownWrapper = styled.div`
     right: 0;
     width: 20rem;
     height: 15rem;
-    padding-top: 2.5rem;
+    padding-top: 2rem;
     cursor: auto;
 `;
 

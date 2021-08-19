@@ -17,42 +17,46 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 SwiperCore.use([Navigation]);
 
 export const PopularThisWeekWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: min-content 1fr;
+    width: 100%;
+    height: 100%;
+    max-height: 40rem;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: flex-start;
 `;
 
 export const PopularThisWeekHeader = styled.div`
-  width: 100%;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: ${props => props.theme.margin.marginSmall};
-`;
-
-export const NavigationWrapper = styled.div`
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: flex-end;
-  column-gap: 1.5rem;
-`;
-
-export const PopularThisWeekSlider = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-
-  & .swiper-container {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-flow: row;
     align-items: center;
-    justify-content: flex-start;
-  }
+    justify-content: space-between;
+    margin-bottom: ${props => props.theme.margin.marginSmall};
+`;
+
+export const NavigationWrapper = styled.div`
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 1.5rem;
+`;
+
+export const PopularThisWeekSlider = styled.div`
+    width: 100%;
+    height: 100%;
+    max-height: 35rem;
+    overflow: hidden;
+
+    & .swiper-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
 `;
 
 export const PopularTVCard = styled.div`
@@ -72,7 +76,7 @@ export const CardBackground = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${props => props.theme.colors.black};
+    background-color: ${props => props.theme.colors.darkGray1};
 
     & .background-image {
         object-fit: cover;
@@ -83,6 +87,7 @@ export const CardBackground = styled.div`
 function PopularThisWeek() {
 
     const [ popularTv, setPopularTv ] = useState([]);
+    const [ isLoading, setIsLoading ] = useState(false);
     const [ disabledButtons, setDisabledButtons ] = useState({
         prevButton: true,
         nextButton: false
@@ -92,18 +97,26 @@ function PopularThisWeek() {
     const sliderNextButton = useRef(null);
 
     useEffect(() => {
+        let didCancel = false;
         const fetchPopularThisWeek = async () => {
+            !didCancel && setIsLoading(true)
             try {   
                 const result = await instance.get(requests.tv.netflixOriginals);
                 if(result.status === 200) {
-                    setPopularTv(result.data.results);
+                    !didCancel && setPopularTv(result.data.results);
                 }
             }
             catch(err) {
                 console.log(err.response.data.status_message)
             }
+            finally {
+                !didCancel && setIsLoading(false);
+            }
         }
         fetchPopularThisWeek();
+        return () => {
+            didCancel = true;
+        }
     }, []);
 
     return (
@@ -127,6 +140,25 @@ function PopularThisWeek() {
                 <Swiper
                     spaceBetween={15}
                     slidesPerView={5}
+                    breakpoints={{
+                        200: {
+                            slidesPerView: 1,
+                            spaceBetween: 10
+                        },
+                        320: {
+                            slidesPerView: 2,
+                            spaceBetween: 15
+                        },
+                        767: {
+                            slidesPerView: 3,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                        },
+                        1500: {
+                            slidesPerView: 5,
+                        }
+                    }}
                     navigation={{
                         prevEl: sliderPrevButton.current,
                         nextEl: sliderNextButton.current,

@@ -71,6 +71,10 @@ const ButtonLabel = styled.label`
     text-transform: uppercase;
     pointer-events: none;
     transition: 0.35s ease-in-out;
+
+    @media ${props => props.theme.breakpoints.phoneMedium} {
+        font-size: 1.2rem;
+    }
 `;
 
 const Button = React.forwardRef(({btnStyle, background, color, rounded, disabled, text, children}, ref) => (

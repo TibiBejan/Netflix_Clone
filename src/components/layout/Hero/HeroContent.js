@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { AiFillPlayCircle } from "react-icons/ai";
 import { Paragraph } from '../../typography/Typography';
@@ -18,6 +19,7 @@ export const DescriptionWrapper = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
+    text-shadow: 0.1rem 0.1rem 0.1rem rgba(0,0,0,0.6);
   }
 `;
 
@@ -27,7 +29,7 @@ export const ActionsWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   column-gap: ${props => props.theme.margin.marginSmall};
-  margin-bottom: ${props => props.theme.margin.marginSmall};
+  margin-bottom: ${props => props.theme.margin.marginMedium};
 `;
 
 function HeroContent({ data }) {
@@ -47,6 +49,10 @@ function HeroContent({ data }) {
             </ActionsWrapper>
         </>
     )
+}
+
+HeroContent.propTypes = {
+    data: PropTypes.object,
 }
 
 export default HeroContent;

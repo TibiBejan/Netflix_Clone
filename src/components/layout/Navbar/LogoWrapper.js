@@ -26,6 +26,7 @@ const NavbarLogo = styled(Link).attrs(() => ({
         transform: translateY(-50%);
     }
 `;
+
 const NavbarDateWrapper = styled.div`
     position: relative;
     height: 5.5rem;
@@ -49,6 +50,10 @@ const NavbarDateWrapper = styled.div`
 
     ${Label}:not(:last-child) {
         margin-right: 1rem;
+    }
+
+    @media ${props => props.theme.breakpoints.phoneMedium} {
+        display: none;
     }
 `;
 

@@ -59,6 +59,24 @@ export const Label = styled.label`
         writing-mode: sideways-rl;
         text-orientation: mixed;
     `}
+    ${props => props.shadow && css`
+        text-shadow: 0.1rem 0.1rem 0.1rem rgba(0,0,0,0.6);
+    `}
+
+    @media ${props => props.theme.breakpoints.phoneMedium} {
+        font-size: ${props => {
+            switch(props.size) {
+                case 'large':
+                    return '1.6rem';
+                case 'medium':
+                    return '1.2rem';
+                case 'small':
+                    return '1rem';
+                default:
+                    return '1.2rem'
+            }
+        }};
+    }
 `;
 
 export const Paragraph = styled.p`
@@ -112,6 +130,19 @@ export const Paragraph = styled.p`
     text-align: ${props => props.textAlign ? props.textAlign : 'left'};
     text-transform: ${props => props.uppercase ? props.uppercase : 'capitalize'};
     line-height: 135%;
+
+    @media ${props => props.theme.breakpoints.phoneMedium} {
+        font-size: ${props => {
+        switch(props.size) {
+            case 'large':
+                return '1.6rem';
+            case 'medium':
+                return '1.2rem';
+            default:
+                return '1.2rem'
+        }
+        }};
+    }
 `;
 
 export const HeadingOne = styled.h1`
@@ -147,7 +178,20 @@ export const HeadingOne = styled.h1`
             default:
                 return '150%';
         }
-    }}
+    }};
+
+    @media ${props => props.theme.breakpoints.phoneMedium} {
+        font-size: ${props => {
+            switch(props.size) {
+                case 'normal':
+                    return '3rem';
+                case 'showcase':
+                    return '4.5rem';
+                default:
+                    return '3rem';
+            }
+        }};
+    }
 `;
 
 export const HeadingThree = styled.h3`
@@ -166,4 +210,8 @@ export const HeadingThree = styled.h3`
     letter-spacing: 0.25rem;
     text-align: ${props => props.textAlign ? props.textAlign : 'left'};
     line-height: 150%;
+
+    @media ${props => props.theme.breakpoints.phoneMedium} {
+        font-size: 2rem;
+    }
 `;

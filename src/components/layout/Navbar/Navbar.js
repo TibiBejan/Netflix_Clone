@@ -23,6 +23,14 @@ export const NavbarWrapper = styled.nav`
         height: 9rem;
         background-color: rgba(0,0,0,0.95);
     `}
+
+    @media ${props => props.theme.breakpoints.tabletLarge} {
+        padding: 0 ${props => props.theme.padding.paddingSmall};
+    }
+
+    @media ${props => props.theme.breakpoints.phoneLarge} {
+        padding: 0 ${props => props.theme.padding.paddingMobile};
+    }
 `;
 
 function Navbar() {
