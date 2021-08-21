@@ -215,3 +215,26 @@ export const HeadingThree = styled.h3`
         font-size: 2rem;
     }
 `;
+
+export const HeadingFour = styled.h4`
+    font-size: 2rem;
+    font-weight: ${props => {
+        switch(props.weight) {
+            case 'normal':
+                return 600;
+            case 'showcase':
+                return 800;
+            default:
+                return 600;
+        }
+    }};
+    color: ${props => props.theme.colors.white};
+    letter-spacing: 0.25rem;
+    text-align: ${props => props.textAlign ? props.textAlign : 'left'};
+    text-transform: ${props => props.uppercase ? 'uppercase' : 'capitalize'};
+    line-height: 150%;
+
+    @media ${props => props.theme.breakpoints.phoneMedium} {
+        font-size: 1.8rem;
+    }
+`;

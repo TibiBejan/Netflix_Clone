@@ -2,19 +2,23 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 import useFetchAll from '../../../hooks/useFetchAll';
-import PreviewCard from '../../core/PreviewCard/PreviewCard';
+
 import ResultsRowSkeleton from '../../skeletons/ResultsRowSkeleton';
 import RowHeader from '../../core/RowHeader/RowHeader';
 import RowNavigation from '../../core/RowNavigation/RowNavigation';
-import { ResultRowWrapper,  ResultsWrapper } from './ResultsRowStyles';
+
+import { OriginalsRowWrapper, ResultsWrapper } from './OriginalsRowStyles';
 
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.min.css"
+import OriginalsCard from '../../core/OriginalsCard/OriginalsCard';
 
 SwiperCore.use([Navigation, Pagination]);
-function ResultsRow({ title, reqLinks, resultsLength }) {
+
+function OriginalsRow({ title, reqLinks }) {
 
     // STATE
     const [ visible, setVisible ] = useState(false);
@@ -25,10 +29,10 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
         nextButton: useRef(null),
     }
 
-    const { results, isLoading, error } = useFetchAll(reqLinks, resultsLength);
+    const { results, isLoading, error } = useFetchAll(reqLinks);
 
     return (
-        <ResultRowWrapper>
+        <OriginalsRowWrapper>
             <RowHeader title={title} ref={paginationRef}/>
             {isLoading && <ResultsRowSkeleton animate/>}
             {error && <ResultsRowSkeleton errorMessage="Oops! Something went wrong..." />}
@@ -36,7 +40,7 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
                 <ResultsWrapper 
                     onMouseEnter={() => setVisible(prevState => !prevState)}
                     onMouseLeave={() => setVisible(prevState => !prevState)}
-                >   
+                >
                     <RowNavigation ref={rowNavigationRef} visible={visible}/>
                     <Swiper
                         spaceBetween={20}
@@ -82,20 +86,19 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
                     >
                         {results.map(result => (
                             <SwiperSlide key={result.id}>
-                                <PreviewCard data={result}/>
+                                <OriginalsCard data={result}/>
                             </SwiperSlide>
                         ))}
                     </Swiper>
                 </ResultsWrapper>
             }
-        </ResultRowWrapper>
+        </OriginalsRowWrapper>
     )
 }
 
-ResultsRow.propTypes = {
+OriginalsRow.propTypes = {
     title: PropTypes.string,
     reqLinks: PropTypes.array,
-    resultsLength: PropTypes.number,
 }
 
-export default ResultsRow;
+export default OriginalsRow;

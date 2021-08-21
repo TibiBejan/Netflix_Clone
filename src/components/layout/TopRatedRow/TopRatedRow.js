@@ -3,18 +3,21 @@ import PropTypes from 'prop-types';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useFetchAll from '../../../hooks/useFetchAll';
-import PreviewCard from '../../core/PreviewCard/PreviewCard';
+
+import ShowcaseCard from '../../core/ShowcaseCard/ShowcaseCard';
 import ResultsRowSkeleton from '../../skeletons/ResultsRowSkeleton';
-import RowHeader from '../../core/RowHeader/RowHeader';
-import RowNavigation from '../../core/RowNavigation/RowNavigation';
-import { ResultRowWrapper,  ResultsWrapper } from './ResultsRowStyles';
+
+import { TopRateRowWrapper, ResultsWrapper } from './TopRatedRowStyles';
 
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.min.css"
+import RowHeader from '../../core/RowHeader/RowHeader';
+import RowNavigation from '../../core/RowNavigation/RowNavigation';
 
 SwiperCore.use([Navigation, Pagination]);
-function ResultsRow({ title, reqLinks, resultsLength }) {
+
+function TopRatedRow({ title, reqLinks, resultsLength }) {
 
     // STATE
     const [ visible, setVisible ] = useState(false);
@@ -28,7 +31,7 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
     const { results, isLoading, error } = useFetchAll(reqLinks, resultsLength);
 
     return (
-        <ResultRowWrapper>
+        <TopRateRowWrapper>
             <RowHeader title={title} ref={paginationRef}/>
             {isLoading && <ResultsRowSkeleton animate/>}
             {error && <ResultsRowSkeleton errorMessage="Oops! Something went wrong..." />}
@@ -36,35 +39,30 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
                 <ResultsWrapper 
                     onMouseEnter={() => setVisible(prevState => !prevState)}
                     onMouseLeave={() => setVisible(prevState => !prevState)}
-                >   
-                    <RowNavigation ref={rowNavigationRef} visible={visible}/>
+                >
+                    <RowNavigation ref={rowNavigationRef} visible={visible} />
                     <Swiper
-                        spaceBetween={20}
+                        spaceBetween={50}
                         slidesPerView={4.5}
                         slidesPerGroup={4}
                         breakpoints={{
                             200: {
                                 slidesPerView: 1,
-                                spaceBetween: 10,
+                                spaceBetween: 25,
                                 slidesPerGroup: 1
                             },
-                            550: {
+                            768: {
                                 slidesPerView: 2,
-                                spaceBetween: 15,
+                                spaceBetween: 50,
                                 slidesPerGroup: 2
                             },
-                            1024: {
-                                slidesPerView: 3,
-                                spaceBetween: 20,
-                                slidesPerGroup: 3
-                            },
                             1500: {
-                                slidesPerView: 3.5,
+                                slidesPerView: 3,
                                 slidesPerGroup: 3
                             },
                             1650: {
-                                slidesPerView: 4.5,
-                                slidesPerGroup: 4
+                                slidesPerView: 3.5,
+                                slidesPerGroup: 3
                             }
                         }}
                         navigation={{
@@ -82,20 +80,20 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
                     >
                         {results.map(result => (
                             <SwiperSlide key={result.id}>
-                                <PreviewCard data={result}/>
+                                <ShowcaseCard data={result}/>
                             </SwiperSlide>
                         ))}
                     </Swiper>
                 </ResultsWrapper>
             }
-        </ResultRowWrapper>
+        </TopRateRowWrapper>
     )
 }
 
-ResultsRow.propTypes = {
+TopRatedRow.propTypes = {
     title: PropTypes.string,
     reqLinks: PropTypes.array,
-    resultsLength: PropTypes.number,
+    resultsLength: PropTypes.number
 }
 
-export default ResultsRow;
+export default TopRatedRow;

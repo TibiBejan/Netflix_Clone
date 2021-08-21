@@ -5,57 +5,43 @@ import requests from '../../../api/Requests';
 import Background from './Background';
 import HeroHeader from './HeroHeader';
 import HeroContent from './HeroContent';
-import PopularThisWeek from './PopularThisWeek';
 import HeroSkeleton from '../../skeletons/HeroSkeleton';
 
 import { HeroWrapper, HeroContentWrapper, HeroContentInner, ContentWrapper } from './HeroStyles';
+import ResultsRow from '../ResultsRow/ResultsRow';
+import OriginalsRow from '../OriginalsRow/OriginalsRow';
 
 function Hero() {
-    const [ loading, setLoading ] = useState(true);
-    const [ data, setData ] = useState({
-        tvData: {},
-        tvCredits: [],
-        tvDetails: {},
-        videos: [],
-    });
-    const [ error, setError ] = useState('');
-
     const generateRandomNumber = (length) => {
          return Math.floor(Math.random() * length);
     }
 
+    const [ result, setResult ] = useState({});
+    const [ isLoading, setIsLoading ] = useState(true);
+    const [ error, setError ] = useState('');
+    
     useEffect(() => {
         let didCancel = false;
-        const fetchPopularTv = async () => {
-            try {
-                const result = await instance.get(requests.tv.netflixOriginals);
-                if(result.status === 200) {
-                    const resultLength = result.data.results.length;
-                    const tvData = result.data.results[generateRandomNumber(resultLength)];
-                    const { id:tvId } = tvData;
-
-                    const [ tvCredits, tvDetails, tvVideos ] = await Promise.all([
-                        instance.get(`https://api.themoviedb.org/3/tv/${tvId}/aggregate_credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`),
-                        instance.get(`https://api.themoviedb.org/3/tv/${tvId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`),
-                        instance.get(`https://api.themoviedb.org/3/tv/${tvId}/videos?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`),
-                    ]);
-                    !didCancel && setData({
-                        tvData,
-                        tvCredits: tvCredits.data.cast.sort((a, b) => b.popularity - a.popularity).slice(0, 2),
-                        tvDetails: tvDetails.data,
-                        videos: tvVideos.data.results,
-                    });
+        const fetchHeroDetails = async () => {
+            instance.get(requests.tv.netflixOriginals).then(response => {
+                let randomNetflixOriginal;
+                if(response.status === 200) {
+                    const responseLength = response.data.results.length;
+                    randomNetflixOriginal = response.data.results[generateRandomNumber(responseLength)];
                 }
-            }
-            catch(err) {
-                setError(err.response.data.status_message);
-            }
-            finally {
-                !didCancel && setLoading(false);
-            }
+                const { id: randomShowId } = randomNetflixOriginal;
+                return instance.get(`https://api.themoviedb.org/3/tv/${randomShowId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`);
+            }).then(response => {
+                if(response.status === 200) {
+                    !didCancel && setResult(response.data);
+                }
+            }).catch(err => {
+                setError(err.response ? err.response.statusText : err.message);
+            }).finally(() => {
+                !didCancel && setIsLoading(false);
+            })
         }
-        fetchPopularTv();
-        
+        fetchHeroDetails();
         return () => {
             didCancel = true;
         }
@@ -63,21 +49,21 @@ function Hero() {
 
     return (
         <>
-            {loading && <HeroSkeleton /> }
+            {isLoading && <HeroSkeleton /> }
             {error && <HeroSkeleton />}
-            {(!loading && !error) && (
+            {(!isLoading && !error) && (
                 <HeroWrapper>
                     <Background 
-                        backdrop_path={ data.tvData.backdrop_path } 
-                        poster_path={ data.tvData.poster_path } 
-                        title={ data.tvData.name } 
+                        backdrop_path={ result.backdrop_path } 
+                        poster_path={ result.poster_path } 
+                        title={ result.name }
                     />
                     <HeroContentWrapper>
                         <HeroContentInner>
                             <ContentWrapper>
-                                <HeroHeader data={ data.tvDetails }/>
-                                <HeroContent data={ data.tvDetails }/>
-                                <PopularThisWeek />
+                                <HeroHeader data={ result }/>
+                                <HeroContent data={ result }/>
+                                <OriginalsRow title="Netflix Originals" reqLinks={[requests.tv.netflixOriginals]}/>
                             </ContentWrapper>
                         </HeroContentInner>
                     </HeroContentWrapper>

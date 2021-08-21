@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ResultRowWrapper = styled.div`
+export const OriginalsRowWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-flow: column;
@@ -13,7 +13,6 @@ export const ResultsWrapper = styled.div`
     position: relative;
     width: 100%;
     height: 30rem;
-    /* overflow-x: hidden; */
 
     @media ${props => props.theme.breakpoints.phoneLarge} {
         padding-right: ${props => props.theme.padding.paddingMobile};
