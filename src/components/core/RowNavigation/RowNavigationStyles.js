@@ -17,7 +17,16 @@ export const RowNavigationWrapper = styled.div`
 `;
 
 export const NavigationButton = styled.button`
-    height: ${props => props.cardType === 'tall' ? '60rem' : '25rem'};
+    height: ${props => {
+        switch(props.cardType) {
+            case 'tall':
+                return '60rem';
+            case 'medium':
+                return '35rem';
+            default:
+                return '25rem';
+        }
+    }};
     width: 5rem;
     background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.7), rgba(0,0,0,0.3));
     visibility: ${props => props.visible === true ? 'visible' : 'hidden'};

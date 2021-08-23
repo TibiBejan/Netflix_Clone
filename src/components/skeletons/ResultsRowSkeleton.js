@@ -18,7 +18,7 @@ const pulse = keyframes`
 const ResultsSkeletonWrapper = styled.div`
     width: 100%;
     height: 30rem;
-    padding-right: ${props => props.theme.padding.paddingMedium};
+    padding-right: ${props => props.noPadding ? 0 : props.theme.padding.paddingMedium};
     overflow: hidden;
 
     @media ${props => props.theme.breakpoints.tabletLarge} {
@@ -43,9 +43,9 @@ const ResultsSkeletonInner = styled.div`
     `}
 `;
 
-function ResultsRowSkeleton({animate, errorMessage}) {
+function ResultsRowSkeleton({animate, errorMessage, noPadding}) {
     return (
-        <ResultsSkeletonWrapper>
+        <ResultsSkeletonWrapper noPadding={noPadding}>
             <ResultsSkeletonInner animate={animate}>
                 {errorMessage && 
                     <Label 

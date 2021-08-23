@@ -201,6 +201,11 @@ const requests = {
 			fetchMovieCredits: `/movie/{{movie_id}}/credits?api_key=${API_KEY}`
         },
     },
+	people: {
+		fetchPopularPeople: `/person/popular?api_key=${API_KEY}&language=en-US&page=1`,
+		fetchPersonDetails: `/person/{{person_id}}?api_key=${API_KEY}&language=en-US`,
+		searchPerson: `/search/person?api_key=${API_KEY}&language=en-US&include_adult=false&query={{query}}`
+	}
 }
 
 export default requests;

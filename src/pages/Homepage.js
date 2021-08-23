@@ -1,5 +1,6 @@
 import React from 'react';
 import requests from '../api/Requests';
+import ActorsRow from '../components/layout/ActorsRow/ActorsRow';
 import Layout from '../components/layout/Layout';
 import ResultsRow from '../components/layout/ResultsRow/ResultsRow';
 
@@ -33,6 +34,7 @@ function Homepage() {
                     cardType={requestObj.cardType}
                 />
             ))}
+            <ActorsRow order={11}/>
         </Layout>
     )
 }

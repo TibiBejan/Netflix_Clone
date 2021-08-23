@@ -21,6 +21,7 @@ const Theme = {
         phoneSmall: 'screen and (max-width: 350px)',
         phoneMedium: 'screen and (max-width: 450px)',
         phoneLarge: 'screen and (max-width: 550px)',
+        utilityTablet: 'screen and (max-width: 700px)',
         tablet: 'screen and (max-width: 768px)',
         tabletLarge: 'screen and (max-width: 1024px)',
         desktopSmall: 'screen and (max-width: 1366px)',

@@ -8,12 +8,7 @@ export const HeroWrapper = styled.div`
   min-height: 90rem;
 
   @media ${props => props.theme.breakpoints.tabletLarge} {
-    height: 75vh;
-    min-height: 65rem;
-  }
-
-  @media ${props => props.theme.breakpoints.phoneLarge} {
-    height: 85vh;
+    height: 70vh;
     min-height: 75rem;
   }
 
