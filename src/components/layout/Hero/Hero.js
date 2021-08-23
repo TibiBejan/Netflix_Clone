@@ -9,7 +9,6 @@ import HeroSkeleton from '../../skeletons/HeroSkeleton';
 
 import { HeroWrapper, HeroContentWrapper, HeroContentInner, ContentWrapper } from './HeroStyles';
 import ResultsRow from '../ResultsRow/ResultsRow';
-import OriginalsRow from '../OriginalsRow/OriginalsRow';
 
 function Hero() {
     const generateRandomNumber = (length) => {
@@ -23,14 +22,13 @@ function Hero() {
     useEffect(() => {
         let didCancel = false;
         const fetchHeroDetails = async () => {
-            instance.get(requests.tv.netflixOriginals).then(response => {
+            instance.get(requests.tv.helpers.fetchNetflixOriginals).then(response => {
                 let randomNetflixOriginal;
                 if(response.status === 200) {
                     const responseLength = response.data.results.length;
                     randomNetflixOriginal = response.data.results[generateRandomNumber(responseLength)];
                 }
-                const { id: randomShowId } = randomNetflixOriginal;
-                return instance.get(`https://api.themoviedb.org/3/tv/${randomShowId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`);
+                return instance.get(requests.tv.helpers.fetchTVDetails.replace('{{tv_id}}', randomNetflixOriginal.id));
             }).then(response => {
                 if(response.status === 200) {
                     !didCancel && setResult(response.data);
@@ -61,11 +59,20 @@ function Hero() {
                     <HeroContentWrapper>
                         <HeroContentInner>
                             <ContentWrapper>
-                                <HeroHeader data={ result }/>
-                                <HeroContent data={ result }/>
-                                <OriginalsRow title="Netflix Originals" reqLinks={[requests.tv.netflixOriginals]}/>
+                                <HeroHeader data={result}/>
+                                <HeroContent data={result}/>
                             </ContentWrapper>
                         </HeroContentInner>
+
+                        <ResultsRow 
+                            title="Recommandations" 
+                            reqLinks={[
+                                requests.tv.helpers.fetchTVRecommendations.replace('{{tv_id}}', result.id),
+                                requests.tv.helpers.fetchNetflixOriginals
+                            ]}
+                            resultsLength={15}
+                            noMargin
+                        /> 
                     </HeroContentWrapper>
                 </HeroWrapper>
             )}

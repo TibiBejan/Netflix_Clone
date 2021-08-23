@@ -6,6 +6,20 @@ export const HeroWrapper = styled.div`
   width: 100%;
   height: 100vh;
   min-height: 90rem;
+
+  @media ${props => props.theme.breakpoints.tabletLarge} {
+    height: 75vh;
+    min-height: 65rem;
+  }
+
+  @media ${props => props.theme.breakpoints.phoneLarge} {
+    height: 85vh;
+    min-height: 75rem;
+  }
+
+  @media ${props => props.theme.breakpoints.phoneMedium} {
+    min-height: 90rem;
+  }
 `;
 
 export const HeroContentWrapper = styled.div`
@@ -13,22 +27,23 @@ export const HeroContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 ${props => props.theme.padding.paddingMedium};
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-left: ${props => props.theme.padding.paddingMedium};
   z-index: 125;
 
   @media ${props => props.theme.breakpoints.tabletLarge} {
-    padding: 0 ${props => props.theme.padding.paddingSmall};
+    padding-left: ${props => props.theme.padding.paddingSmall};
   }
 
   @media ${props => props.theme.breakpoints.phoneLarge} {
-    padding: 0 ${props => props.theme.padding.paddingMobile};
+    padding-left: ${props => props.theme.padding.paddingMobile};
   }
 `;
 
 export const HeroContentInner = styled.div`
-  height: 100%;
+  height: auto;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 50%);
@@ -49,7 +64,7 @@ export const ContentWrapper = styled.div`
   flex-flow: column;
   align-items: flex-start;
   justify-content: center;
-  padding: ${props => props.theme.padding.paddingSmall} 0;
+  padding-top: ${props => props.theme.padding.paddingSmall};
   overflow: hidden;
 
   ${HeadingOne} {
@@ -58,5 +73,6 @@ export const ContentWrapper = styled.div`
 
   @media ${props => props.theme.breakpoints.phoneLarge} {
     grid-column: 1 / -1;
+    padding-right: ${props => props.theme.padding.paddingMobile};
   }
 `;

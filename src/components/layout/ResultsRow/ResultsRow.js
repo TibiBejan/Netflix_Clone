@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { trackWindowScroll }from 'react-lazy-load-image-component';
 import useFetchAll from '../../../hooks/useFetchAll';
 import PreviewCard from '../../core/PreviewCard/PreviewCard';
 import ResultsRowSkeleton from '../../skeletons/ResultsRowSkeleton';
@@ -14,7 +15,7 @@ import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.min.css"
 
 SwiperCore.use([Navigation, Pagination]);
-function ResultsRow({ title, reqLinks, resultsLength }) {
+function ResultsRow({ title, reqLinks, resultsLength, noMargin, cardType }) {
 
     // STATE
     const [ visible, setVisible ] = useState(false);
@@ -24,11 +25,10 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
         prevButton: useRef(null),
         nextButton: useRef(null),
     }
-
     const { results, isLoading, error } = useFetchAll(reqLinks, resultsLength);
 
     return (
-        <ResultRowWrapper>
+        <ResultRowWrapper noMargin={noMargin}>
             <RowHeader title={title} ref={paginationRef}/>
             {isLoading && <ResultsRowSkeleton animate/>}
             {error && <ResultsRowSkeleton errorMessage="Oops! Something went wrong..." />}
@@ -44,7 +44,7 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
                         slidesPerGroup={4}
                         breakpoints={{
                             200: {
-                                slidesPerView: 1,
+                                slidesPerView: 1.5,
                                 spaceBetween: 10,
                                 slidesPerGroup: 1
                             },
@@ -80,9 +80,12 @@ function ResultsRow({ title, reqLinks, resultsLength }) {
                         resistance={true}
                         resistanceRatio={0.5}
                     >
-                        {results.map(result => (
-                            <SwiperSlide key={result.id}>
-                                <PreviewCard data={result}/>
+                        {results.map((result, index) => (
+                            <SwiperSlide key={`${result.id}-${index}`}>
+                                <PreviewCard 
+                                    data={result}
+                                    cardType={cardType}    
+                                />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -96,6 +99,8 @@ ResultsRow.propTypes = {
     title: PropTypes.string,
     reqLinks: PropTypes.array,
     resultsLength: PropTypes.number,
+    noMargin: PropTypes.bool,
+    cardType: PropTypes.string
 }
 
-export default ResultsRow;
+export default trackWindowScroll(ResultsRow);

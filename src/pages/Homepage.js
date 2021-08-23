@@ -2,11 +2,10 @@ import React from 'react';
 import requests from '../api/Requests';
 import Layout from '../components/layout/Layout';
 import ResultsRow from '../components/layout/ResultsRow/ResultsRow';
-import TopRatedRow from '../components/layout/TopRatedRow/TopRatedRow';
 
 function Homepage() {
 
-    const reqEndpoints = requests.tv.categories.map(tvCategory => {
+    const requestsObj = requests.tv.categories.map(tvCategory => {
         return requests.movies.categories.reduce((acc, obj) => {
             if(tvCategory.title === obj.title) {
                 acc.title = obj.title;
@@ -21,32 +20,19 @@ function Homepage() {
             cardType: null,
             resultsLength: null
         });
-    }).filter(request => request.length !== 0);
+    }).filter(request => request.endpoints !== null);
 
     return (
         <Layout>
-            {reqEndpoints.map((endpoint, index) => (
+            {requestsObj.map((requestObj, index) => (
                 <ResultsRow 
-                    key={`${endpoint}${index}`}
-                    title={endpoint.title} 
-                    reqLinks={endpoint.endpoints} 
-                    resultsLength={endpoint.resultsLength}
+                    key={`${requestObj}${index}`}
+                    title={requestObj.title} 
+                    reqLinks={requestObj.endpoints} 
+                    resultsLength={requestObj.resultsLength}
+                    cardType={requestObj.cardType}
                 />
             ))}
-             {/* <ResultsRow 
-                title="Popular on Netflix" 
-                reqLinks={[requests.tv.getPopularTv, requests.movies.getPopularMovies]} 
-            />
-           <ResultsRow 
-                title="Popular today" 
-                reqLinks={[requests.tv.netflixOriginals, requests.movies.getNowPlayingOriginals]} 
-            />
-            <TopRatedRow 
-                title="Top 10 in Romania today" 
-                reqLinks={[requests.tv.getAiringTodayTv, requests.movies.getNowPlayingMovies]} 
-                resultsLength={10}
-                type='top-rated'
-            />  */}
         </Layout>
     )
 }

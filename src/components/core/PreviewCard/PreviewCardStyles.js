@@ -11,10 +11,10 @@ export const ResultCard = styled.div`
 
 
 export const ResultCardShowcase = styled.div`
-    height: 25rem;
+    height: ${props => props.cardType === 'tall' ? '60rem' : '25rem'};
     width: 100%;
     margin-bottom: ${props => props.theme.margin.marginSmall};
-    border-radius: 1.5rem;
+    border-radius: ${props => props.cardType === 'tall' ? '0.5rem' : '1.5rem'};
     background-color: ${props => props.theme.colors.darkGray1};
     overflow: hidden;
 
@@ -24,7 +24,7 @@ export const ResultCardShowcase = styled.div`
         top: 0;
         left: 0;
         width: 100%;
-        height: 25rem;
+        height: ${props => props.cardType === 'tall' ? '60rem' : '25rem'};;
         border-radius: inherit;
         opacity: ${props => props.isHovered ? 1 : 0};
         visibility: ${props => props.isHovered ? 'visible' : 'hidden'};

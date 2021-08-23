@@ -6,18 +6,13 @@ export const ResultRowWrapper = styled.div`
     flex-flow: column;
     align-items: flex-start;
     justify-content: flex-start;
-    margin-bottom: ${props => props.theme.margin.marginLarge};
+    margin-bottom: ${props => props.noMargin ? 0 : props.theme.margin.marginLarge};
 `;
 
 export const ResultsWrapper = styled.div`
     position: relative;
     width: 100%;
-    height: 30rem;
-    /* overflow-x: hidden; */
-
-    @media ${props => props.theme.breakpoints.phoneLarge} {
-        padding-right: ${props => props.theme.padding.paddingMobile};
-    }
+    min-height: 30rem;
 
     & .swiper-container {
         width: 100%;

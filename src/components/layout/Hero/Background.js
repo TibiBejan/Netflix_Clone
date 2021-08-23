@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const HeroBackground = styled.div`
     position: absolute;
@@ -44,7 +45,7 @@ function Background({ backdrop_path, poster_path, title }) {
     return (
         <HeroBackground>
             <HeroBackgroundInner>
-                <img 
+                <LazyLoadImage 
                     src={ backdrop_path 
                         ? `https://image.tmdb.org/t/p/original/${backdrop_path}` 
                         : `https://image.tmdb.org/t/p/original/${poster_path}`

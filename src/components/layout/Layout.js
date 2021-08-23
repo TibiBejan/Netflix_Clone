@@ -7,11 +7,10 @@ const MainWrapper = styled.main`
     width: 100%;
     display: flex;
     flex-flow: column;
-    padding-top: ${props => props.theme.padding.paddingLarge};
+    padding-top: ${props => props.theme.padding.paddingMedium};
     padding-left: ${props => props.theme.padding.paddingMedium};
 
     @media ${props => props.theme.breakpoints.tabletLarge} {
-        padding-top: 0;
         padding-left: ${props => props.theme.padding.paddingSmall};
     }
 
