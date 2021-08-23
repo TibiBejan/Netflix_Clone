@@ -37,7 +37,7 @@ function ResultsRow({ title, reqLinks, resultsLength, noMargin, cardType }) {
                     onMouseEnter={() => setVisible(prevState => !prevState)}
                     onMouseLeave={() => setVisible(prevState => !prevState)}
                 >   
-                    <RowNavigation ref={rowNavigationRef} visible={visible}/>
+                    <RowNavigation ref={rowNavigationRef} visible={visible} cardType={cardType}/>
                     <Swiper
                         spaceBetween={20}
                         slidesPerView={4.5}

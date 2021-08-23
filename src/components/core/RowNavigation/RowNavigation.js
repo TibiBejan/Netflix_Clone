@@ -8,12 +8,12 @@ const RowNavigation = React.forwardRef((props, ref) => {
 
     return (
         <RowNavigationWrapper>
-            <NavigationButton ref={prevButton} visible={props.visible}>
+            <NavigationButton ref={prevButton} visible={props.visible} cardType={props.cardType}>
                 <IconContext.Provider value={{color: '#fff', size: '32px'}}>
                     <FaChevronLeft />
                 </IconContext.Provider>
             </NavigationButton>
-            <NavigationButton ref={nextButton} visible={props.visible}>
+            <NavigationButton ref={nextButton} visible={props.visible} cardType={props.cardType}>
                 <IconContext.Provider value={{color: '#fff', size: '32px'}}>
                     <FaChevronRight />
                 </IconContext.Provider>
