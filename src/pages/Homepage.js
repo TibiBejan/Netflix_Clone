@@ -3,16 +3,37 @@ import requests from '../api/Requests';
 import Layout from '../components/layout/Layout';
 import ResultsRow from '../components/layout/ResultsRow/ResultsRow';
 import TopRatedRow from '../components/layout/TopRatedRow/TopRatedRow';
-import useFetch from '../hooks/useFetch';
 
 function Homepage() {
 
-    const { result, isLoading, error } = useFetch(requests.genres.getTvGenres);
-    console.log(result && result.genres)
+    const reqEndpoints = requests.tv.categories.map(tvCategory => {
+        return requests.movies.categories.reduce((acc, obj) => {
+            if(tvCategory.title === obj.title) {
+                acc.title = obj.title;
+                acc.endpoints = [tvCategory.endpoint, obj.endpoint];
+                acc.cardType = obj.cardType ? obj.cardType : 'wide';
+                acc.resultsLength = obj.resultsLength ? obj.resultsLength : 40;
+            }
+            return acc;
+        }, {
+            title: null,
+            endpoints: null,
+            cardType: null,
+            resultsLength: null
+        });
+    }).filter(request => request.length !== 0);
 
     return (
         <Layout>
-            <ResultsRow 
+            {reqEndpoints.map((endpoint, index) => (
+                <ResultsRow 
+                    key={`${endpoint}${index}`}
+                    title={endpoint.title} 
+                    reqLinks={endpoint.endpoints} 
+                    resultsLength={endpoint.resultsLength}
+                />
+            ))}
+             {/* <ResultsRow 
                 title="Popular on Netflix" 
                 reqLinks={[requests.tv.getPopularTv, requests.movies.getPopularMovies]} 
             />
@@ -25,7 +46,7 @@ function Homepage() {
                 reqLinks={[requests.tv.getAiringTodayTv, requests.movies.getNowPlayingMovies]} 
                 resultsLength={10}
                 type='top-rated'
-            />
+            />  */}
         </Layout>
     )
 }

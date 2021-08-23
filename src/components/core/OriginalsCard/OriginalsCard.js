@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useHover from '../../../hooks/useHover';
-import { Label } from '../../typography/Typography';
 import { OriginalsCardWrapper, OriginalsCardInner } from './OriginalsCardStyles';
 
 function OriginalsCard({ data }) {
