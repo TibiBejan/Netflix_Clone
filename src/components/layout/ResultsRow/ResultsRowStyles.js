@@ -7,6 +7,10 @@ export const ResultRowWrapper = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     margin-bottom: ${props => props.noMargin ? 0 : props.theme.margin.marginLarge};
+
+    @media ${props => props.theme.breakpoints.phoneLarge} {
+        margin-bottom: ${props => props.noMargin ? 0 : props.theme.margin.marginMedium};
+    }
 `;
 
 export const ResultsWrapper = styled.div`

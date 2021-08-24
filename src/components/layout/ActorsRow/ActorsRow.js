@@ -39,7 +39,8 @@ function ActorsRow({ order }) {
     }
 
     const handleSubmit = (e) => {
-         const searchActors = async () => {
+        
+        const searchActors = async () => {
             try {
                 setSearchLoading(true);
                 const searchResult = await instance.get(requests.people.searchPerson.replace('{{query}}', searchQuery));

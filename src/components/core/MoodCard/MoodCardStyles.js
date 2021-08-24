@@ -24,13 +24,13 @@ export const MoodCardInner = styled.div`
 `;
 
 export const MoodCardIcon = styled.div`
-    max-width: 5rem;
-    max-height: 5rem;
+    width: 5rem;
+    height: 5rem;
     margin-bottom: 1.5rem;
 
     @media ${props => props.theme.breakpoints.desktopSmall} {
-        max-width: 4rem;
-        max-height: 4rem;
+       width: 4rem;
+        height: 4rem;
     }
 `;
 

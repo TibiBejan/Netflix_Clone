@@ -194,6 +194,34 @@ export const HeadingOne = styled.h1`
     }
 `;
 
+export const HeadingTwo = styled.h3`
+    font-size: 3.5rem;
+    font-weight: ${props => {
+        switch(props.weight) {
+            case 'normal':
+                return 500;
+            case 'bold':
+                return 600;
+            case 'showcase':
+                return 800;
+            default:
+                return 500;
+        }
+    }};
+    color: ${props => props.theme.colors.white};
+    letter-spacing: 0.25rem;
+    text-align: ${props => props.textAlign ? props.textAlign : 'left'};
+    line-height: 150%;
+
+    @media ${props => props.theme.breakpoints.tabletLarge} {
+        font-size: 3rem;
+    }
+
+    @media ${props => props.theme.breakpoints.phoneLarge} {
+        font-size: 2.5rem;
+    }
+`;
+
 export const HeadingThree = styled.h3`
     font-size: 2.5rem;
     font-weight: ${props => {

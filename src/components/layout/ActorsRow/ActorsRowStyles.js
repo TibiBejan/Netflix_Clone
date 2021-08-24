@@ -14,6 +14,7 @@ export const ActorsRowWrapper = styled.div`
     }
 
     @media ${props => props.theme.breakpoints.phoneLarge} {
+        margin: ${props => props.theme.margin.marginMedium} 0;
         padding-right: ${props => props.theme.padding.paddingMobile};
     }
 `;
