@@ -201,6 +201,138 @@ const requests = {
 			fetchMovieCredits: `/movie/{{movie_id}}/credits?api_key=${API_KEY}`
         },
     },
+	mood: [
+		{
+			title: 'Date Night',
+			icon: require(`../assets/icons/heart.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=10749|35|9648&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=35|9648&with_watch_providers=8&watch_region=US`
+			]
+		},
+		{
+			title: 'Lazy evening',
+			icon: require(`../assets/icons/coffee.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_watch_providers=8&with_genres=878|35|12|10751|14`,
+				`discover/tv?api_key=${API_KEY}&with_networks=213&with_genres=10765|35|10759|10765|10751`,
+			]
+		},
+		{
+			title: 'Mind-bending',
+			icon: require(`../assets/icons/brain.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=53|9648|80&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=9648|80&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: 'Humor',
+			icon: require(`../assets/icons/laughing.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=35|10751&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=35|10751&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: 'Action',
+			icon: require(`../assets/icons/running-man.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=28|12&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=10759&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: 'Friends',
+			icon: require(`../assets/icons/couch-sofa.svg`).default,
+			endpoints: [
+				`/movie/popular?api_key=${API_KEY}&sort_by=vote_average.desc`,
+				`/tv/popular?api_key=${API_KEY}&language=en-US&with_networks=21`,
+			],
+		},
+		{
+			title: 'Inner Child',
+			icon: require(`../assets/icons/teddy-bear.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=10751|16|10402&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=10751|16&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: 'Sentimental',
+			icon: require(`../assets/icons/sentimental.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=10749|18|9648&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=18|9648&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: 'Last Hangover',
+			icon: require(`../assets/icons/wine-glass.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=35&with_watch_providers=8&watch_region=US`,
+				`/movie/popular?api_key=${API_KEY}&sort_by=vote_average.desc`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=35&with_watch_providers=8&watch_region=US`,
+				`tv/popular?api_key=${API_KEY}&language=en-US&with_networks=21`,
+			],
+		},
+		{
+			title: 'Learn',
+			icon: require(`../assets/icons/opened-book.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=36|99&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=99&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: 'Explore World',
+			icon: require(`../assets/icons/globe.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=36|10752|99&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=10767|10766|10764|99|10768&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: 'Be Inspired',
+			icon: require(`../assets/icons/bulb.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=99&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=10767|99&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: 'Sci Fi',
+			icon: require(`../assets/icons/alien.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=14|878&with_watch_providers=8&watch_region=US`,
+				`discover/tv?api_key=${API_KEY}&with_genres=10765&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: "I don't know",
+			icon: require(`../assets/icons/dices.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_watch_providers=8&watch_region=US&page={{number}}`,
+				`discover/tv?api_key=${API_KEY}&with_genres=10765&with_watch_providers=8&watch_region=US&page={{number}}`
+			],
+		},
+		{
+			title: "Be Scared",
+			icon: require(`../assets/icons/knife.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=27|80&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=80&with_watch_providers=8&watch_region=US`
+			],
+		},
+		{
+			title: "Heart-break",
+			icon: require(`../assets/icons/broken-heart.svg`).default,
+			endpoints: [
+				`/discover/movie?api_key=${API_KEY}&with_genres=10752|80|18&with_watch_providers=8&watch_region=US`,
+				`/discover/tv?api_key=${API_KEY}&with_genres=10768|80|18&with_watch_providers=8&watch_region=US`
+			],
+		},
+	],
 	people: {
 		fetchPopularPeople: `/person/popular?api_key=${API_KEY}&language=en-US&page=1`,
 		fetchPersonDetails: `/person/{{person_id}}?api_key=${API_KEY}&language=en-US`,

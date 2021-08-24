@@ -2,6 +2,7 @@ import React from 'react';
 import requests from '../api/Requests';
 import ActorsRow from '../components/layout/ActorsRow/ActorsRow';
 import Layout from '../components/layout/Layout';
+import MoodRow from '../components/layout/MoodRow/MoodRow';
 import ResultsRow from '../components/layout/ResultsRow/ResultsRow';
 
 function Homepage() {
@@ -35,6 +36,7 @@ function Homepage() {
                 />
             ))}
             <ActorsRow order={11}/>
+            <MoodRow />
         </Layout>
     )
 }

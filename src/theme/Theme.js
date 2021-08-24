@@ -25,6 +25,7 @@ const Theme = {
         tablet: 'screen and (max-width: 768px)',
         tabletLarge: 'screen and (max-width: 1024px)',
         desktopSmall: 'screen and (max-width: 1366px)',
+        utilityDesktop: 'screen and (max-width: 1500px)',
         desktopLarge: 'screen and (max-width: 1920px)',
     },
     padding: {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FaSearch, FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { Label } from '../../typography/Typography';
+import profileImage from '../../../assets/images/profile-picture.png';
 
 const NavbarActions = styled.div`
     display: flex;
@@ -55,7 +56,7 @@ const ProfilePicture = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${props => props.theme.colors.red};
+    background-color: ${props => props.theme.colors.darkGray1};
     overflow: hidden;
 `;
 
@@ -138,7 +139,7 @@ function ActionsWrapper() {
                     { isHovered ? <FaCaretUp /> : <FaCaretDown /> }
                 </IconContext.Provider>
                 <ProfilePicture>
-                    {/* <img src="" alt="" className="background-image" /> */}
+                    <img src={profileImage} alt="User profile" className="background-image" />
                 </ProfilePicture>
                 {isHovered && 
                     <DropdownWrapper>

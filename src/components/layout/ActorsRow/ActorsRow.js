@@ -15,6 +15,7 @@ import { ActorsRowWrapper, ActorsRowBody, PopularActorsWrapper, PaginationWrappe
 
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.min.css"
 SwiperCore.use([Navigation, Pagination]);
 
 function ActorsRow({ order }) {
