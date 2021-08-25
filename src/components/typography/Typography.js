@@ -131,7 +131,7 @@ export const Paragraph = styled.p`
     text-transform: ${props => props.uppercase ? props.uppercase : 'capitalize'};
     line-height: 135%;
 
-    @media ${props => props.theme.breakpoints.phoneMedium} {
+    @media ${props => props.theme.breakpoints.phoneSmall} {
         font-size: ${props => {
         switch(props.size) {
             case 'large':
