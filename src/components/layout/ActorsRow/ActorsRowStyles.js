@@ -5,7 +5,7 @@ export const ActorsRowWrapper = styled.div`
     flex-flow: column;
     align-items: flex-start;
     justify-content: flex-start;
-    order: ${props => props.order ? props.order : -1};
+    grid-row: ${props => props.order && props.order};
     margin: ${props => props.theme.margin.marginLarge} 0;
     padding-right: ${props => props.theme.padding.paddingMedium};
 

@@ -5,8 +5,9 @@ import Footer from './Footer/Footer';
 
 const MainWrapper = styled.main`
     width: 100%;
-    display: flex;
-    flex-flow: column;
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-auto-rows: max-content;
     padding-top: ${props => props.theme.padding.paddingMedium};
     padding-left: ${props => props.theme.padding.paddingMedium};
 

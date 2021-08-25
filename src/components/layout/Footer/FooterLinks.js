@@ -37,7 +37,7 @@ const FooterColLinks = styled.ul`
     display: flex;
     flex-flow: column;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
 
     @media ${props => props.theme.breakpoints.tabletLarge} {
         align-items: center;
@@ -46,33 +46,34 @@ const FooterColLinks = styled.ul`
 
 const ColLink = styled.li`
     width: 100%;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0.2rem;
-        background-color: ${props => props.theme.colors.white};
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: 0.35s cubic-bezier(0.39, 0.575, 0.565, 1);
-    }
+    margin-bottom: 2.5rem;
 
     ${Label} {
+        position: relative;
+        padding-bottom: 0.5rem;
         cursor: pointer;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0%;
+            height: 0.2rem;
+            background-color: ${props => props.theme.colors.white};
+            transition: 0.35s cubic-bezier(0.39, 0.575, 0.565, 1);
+        }
     }
 
     &:hover {
-        &::after {
-            transform: scaleX(1); 
+        ${Label} {
+            &::after {
+                left: 0;
+                width: 100%;
+            }
         }
     }
 `;

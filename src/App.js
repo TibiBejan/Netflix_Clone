@@ -4,8 +4,11 @@ import Homepage from './pages/Homepage';
 import LogIn from './pages/LogIn';
 import SignIn from './pages/SignIn';
 import Movies from './pages/Movies';
+import Movie from './pages/Movie';
 import Series from './pages/Series';
+import TvShow from './pages/TvShow';
 import Kids from './pages/Kids';
+import Discover from './pages/Discover';
 
 function App() {
   return (
@@ -21,14 +24,23 @@ function App() {
           <Route path='/login'>
             <LogIn />
           </Route>
-          <Route path='/series'>
+          <Route exact path='/series'>
             <Series />
           </Route>
-          <Route path='/movies'>
+          <Route path='/series/:id'>
+            <TvShow />
+          </Route>
+          <Route exact path='/movies'>
             <Movies />
+          </Route>
+          <Route path='/movies/:id'>
+            <Movie />
           </Route>
           <Route path='/kids'>
             <Kids />
+          </Route>
+          <Route path='/discover'>
+            <Discover />
           </Route>
         </Switch>
       </Router>

@@ -36,7 +36,7 @@ function Homepage() {
                 />
             ))}
             <ActorsRow order={11}/>
-            <MoodRow />
+            <MoodRow/>
         </Layout>
     )
 }

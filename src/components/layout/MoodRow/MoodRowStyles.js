@@ -7,6 +7,7 @@ export const MoodRowWrapper = styled.div`
     flex-flow: column;
     align-items: flex-start;
     justify-content: flex-start;
+    grid-row: ${props => props.order && props.order};
     margin: ${props => props.theme.margin.marginLarge} 0;
     padding-right: ${props => props.theme.padding.paddingMedium};
 

@@ -96,6 +96,7 @@ const requests = {
 			fetchTVRecommendations: `/tv/{{tv_id}}/recommendations?api_key=${API_KEY}`,
 			fetchTVSeason: `/tv/{{tv_id}}/season/{{season_number}}?api_key=${API_KEY}`,
 			fetchNetflixOriginals: `discover/tv?api_key=${API_KEY}&with_networks=213`,
+			fetchShowByCast: `/discover/tv?api_key=${API_KEY}&with_cast={{actor-id}}`
         }
     },
     movies: {
@@ -198,11 +199,13 @@ const requests = {
 			fetchMovieVideos: `/movie/{{movie_id}}/videos?api_key=${API_KEY}`,
 			fetchMovieDetails: `/movie/{{movie_id}}?api_key=${API_KEY}`,
 			fetchMovieRecommendations: `/movie/{{movie_id}}/recommendations?api_key=${API_KEY}`,
-			fetchMovieCredits: `/movie/{{movie_id}}/credits?api_key=${API_KEY}`
+			fetchMovieCredits: `/movie/{{movie_id}}/credits?api_key=${API_KEY}`,
+			fetchMovieByCast: `/discover/movie?api_key=${API_KEY}&with_cast={{actor-id}}`
         },
     },
 	mood: [
 		{
+			query: 'data-night',
 			title: 'Date Night',
 			icon: require(`../assets/icons/heart.svg`).default,
 			endpoints: [
@@ -211,6 +214,7 @@ const requests = {
 			]
 		},
 		{
+			query: 'lazy-evening',
 			title: 'Lazy evening',
 			icon: require(`../assets/icons/coffee.svg`).default,
 			endpoints: [
@@ -219,6 +223,7 @@ const requests = {
 			]
 		},
 		{
+			query: 'min-bending',
 			title: 'Mind-bending',
 			icon: require(`../assets/icons/brain.svg`).default,
 			endpoints: [
@@ -227,6 +232,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'humor',
 			title: 'Humor',
 			icon: require(`../assets/icons/laughing.svg`).default,
 			endpoints: [
@@ -235,6 +241,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'action',
 			title: 'Action',
 			icon: require(`../assets/icons/running-man.svg`).default,
 			endpoints: [
@@ -243,6 +250,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'friends',
 			title: 'Friends',
 			icon: require(`../assets/icons/couch-sofa.svg`).default,
 			endpoints: [
@@ -251,6 +259,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'inner-child',
 			title: 'Inner Child',
 			icon: require(`../assets/icons/teddy-bear.svg`).default,
 			endpoints: [
@@ -259,6 +268,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'sentimental',
 			title: 'Sentimental',
 			icon: require(`../assets/icons/sentimental.svg`).default,
 			endpoints: [
@@ -267,6 +277,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'last-hangover',
 			title: 'Last Hangover',
 			icon: require(`../assets/icons/wine-glass.svg`).default,
 			endpoints: [
@@ -277,6 +288,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'learn',
 			title: 'Learn',
 			icon: require(`../assets/icons/opened-book.svg`).default,
 			endpoints: [
@@ -285,6 +297,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'explore-world',
 			title: 'Explore World',
 			icon: require(`../assets/icons/globe.svg`).default,
 			endpoints: [
@@ -293,6 +306,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'be-inspired',
 			title: 'Be Inspired',
 			icon: require(`../assets/icons/bulb.svg`).default,
 			endpoints: [
@@ -301,6 +315,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'sci-fi',
 			title: 'Sci Fi',
 			icon: require(`../assets/icons/alien.svg`).default,
 			endpoints: [
@@ -308,7 +323,8 @@ const requests = {
 				`discover/tv?api_key=${API_KEY}&with_genres=10765&with_watch_providers=8&watch_region=US`
 			],
 		},
-		{
+		{  
+			query: 'i-dont-know',
 			title: "I don't know",
 			icon: require(`../assets/icons/dices.svg`).default,
 			endpoints: [
@@ -317,6 +333,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'be-scared',
 			title: "Be Scared",
 			icon: require(`../assets/icons/knife.svg`).default,
 			endpoints: [
@@ -325,6 +342,7 @@ const requests = {
 			],
 		},
 		{
+			query: 'heart-break',
 			title: "Heart-break",
 			icon: require(`../assets/icons/broken-heart.svg`).default,
 			endpoints: [
@@ -337,6 +355,9 @@ const requests = {
 		fetchPopularPeople: `/person/popular?api_key=${API_KEY}&language=en-US&page=1`,
 		fetchPersonDetails: `/person/{{person_id}}?api_key=${API_KEY}&language=en-US`,
 		searchPerson: `/search/person?api_key=${API_KEY}&language=en-US&include_adult=false&query={{query}}`
+	},
+	helpers: {
+		fetchMultiSearch: `/search/multi?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query={{query}}`
 	}
 }
 

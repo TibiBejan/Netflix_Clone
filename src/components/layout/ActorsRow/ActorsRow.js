@@ -35,11 +35,15 @@ function ActorsRow({ order }) {
     const {result:actors, isLoading, error} = useFetch(requests.people.fetchPopularPeople);
 
     const handleChange = (e) => {
-        setSearchQuery(e.target.value);
+        const querry = e.target.value;
+        if(querry === '') {
+            setSearchQuery('');
+        } else {
+            setSearchQuery(e.target.value);
+        }
     }
 
     const handleSubmit = (e) => {
-        
         const searchActors = async () => {
             try {
                 setSearchLoading(true);
@@ -116,7 +120,7 @@ function ActorsRow({ order }) {
                         >
                             {
                                 (() => {
-                                    if(searchedActors.length !== 0) {
+                                    if(searchedActors.length !== 0 && searchQuery !== '') {
                                         return (
                                             searchedActors.map(actor => (
                                                 <SwiperSlide key={actor.id}>

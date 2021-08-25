@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import requests from '../../../api/Requests';
 import { HeadingFour } from '../../typography/Typography';
 import MoodCard from '../../core/MoodCard/MoodCard';
@@ -13,14 +14,14 @@ import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.min.css"
 SwiperCore.use([Navigation, Pagination]);
 
-function MoodRow() {
+function MoodRow({ order }) {
 
     // REF
     const paginationRef = useRef(null);
     const { width: windowWidth } = useWindowSize();
 
     return (
-        <MoodRowWrapper>
+        <MoodRowWrapper order={order}>
             <MoodRowHeading>
                 <HeadingFour uppercase>Discover by mood</HeadingFour>
             </MoodRowHeading>
@@ -84,6 +85,10 @@ function MoodRow() {
             </MoodRowBody>
         </MoodRowWrapper>
     )
+}
+
+MoodRow.propTypes = {
+    order: PropTypes.number
 }
 
 export default MoodRow;
