@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout';
 
 function Movies() {
     return (
-        <Layout>
+        <Layout isShowcase>
             <h1>Movies</h1>
         </Layout>
     )

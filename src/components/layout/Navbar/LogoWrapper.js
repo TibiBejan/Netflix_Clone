@@ -64,7 +64,8 @@ function LogoWrapper() {
     const currentDay = DAYS_IN_WEEK[currentDate.getDay() - 1]
 
     useEffect(() => {
-        setInterval(() => setCurrentDate(new Date()), 30000);
+        const interval = setInterval(() => setCurrentDate(new Date()), 30000);
+        return () => clearInterval(interval);
     }, [])
 
     return (

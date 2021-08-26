@@ -3,8 +3,8 @@ import Layout from '../components/layout/Layout';
 
 function Series() {
     return (
-        <Layout>
-           <h1>Series</h1> 
+        <Layout isShowcase>
+            <h1>Series</h1>
         </Layout>
     )
 }

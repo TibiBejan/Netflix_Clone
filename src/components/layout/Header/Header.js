@@ -1,14 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import Navbar from '../../layout/Navbar/Navbar';
 import Hero from '../Hero/Hero';
 
-function Header() {
+function Header({ isShowcase }) {
     return (
         <div className="page-header">
             <Navbar />
-            <Hero />
+            { isShowcase && <Hero /> }
         </div>
     )
+}
+
+Header.propTypes = {
+    isShowcase: PropTypes.bool
 }
 
 export default Header;

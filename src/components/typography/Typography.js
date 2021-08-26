@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 export const Label = styled.label`
     font-size: ${props => {
         switch(props.size) {
+            case 'xLarge':
+                return '3rem'
             case 'large':
                 return '2rem';
             case 'medium':
@@ -66,6 +68,8 @@ export const Label = styled.label`
     @media ${props => props.theme.breakpoints.phoneMedium} {
         font-size: ${props => {
             switch(props.size) {
+                case 'xLarge':
+                    return '2.5rem'
                 case 'large':
                     return '1.6rem';
                 case 'medium':

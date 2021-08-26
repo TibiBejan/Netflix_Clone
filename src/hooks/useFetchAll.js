@@ -20,7 +20,7 @@ const useFetchAll = (links, resultsLength) => {
                 const fetchedResults = results.map((res) => res.data.results).flat().slice(0, resultsLength);
                 !didCancel && setResults(Shuffle(fetchedResults));
             }).catch(err => {
-                setError(err.message);
+                setError(err.response ? err.response.data.status_message : err.message);
                 console.log(err)
             }).finally(() => {
                 !didCancel && setIsLoading(false);

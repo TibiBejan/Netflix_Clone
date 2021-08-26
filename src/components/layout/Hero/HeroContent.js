@@ -29,6 +29,10 @@ export const ActionsWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   column-gap: ${props => props.theme.margin.marginSmall};
+  
+  @media ${props => props.theme.breakpoints.tabletLarge} {
+    margin-bottom: ${props => props.theme.margin.marginMedium};
+  }
 `;
 
 function HeroContent({ data }) {

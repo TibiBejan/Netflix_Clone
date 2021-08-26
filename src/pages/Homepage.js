@@ -1,12 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 import requests from '../api/Requests';
 import ActorsRow from '../components/layout/ActorsRow/ActorsRow';
 import Layout from '../components/layout/Layout';
 import MoodRow from '../components/layout/MoodRow/MoodRow';
 import ResultsRow from '../components/layout/ResultsRow/ResultsRow';
 
-function Homepage() {
+const ContentWrapper = styled.div`
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-auto-rows: max-content;
+    padding-top: 12.5rem;
+`;
 
+function Homepage() {
     const requestsObj = requests.tv.categories.map(tvCategory => {
         return requests.movies.categories.reduce((acc, obj) => {
             if(tvCategory.title === obj.title) {
@@ -25,18 +34,20 @@ function Homepage() {
     }).filter(request => request.endpoints !== null);
 
     return (
-        <Layout>
-            {requestsObj.map((requestObj, index) => (
-                <ResultsRow 
-                    key={`${requestObj}${index}`}
-                    title={requestObj.title} 
-                    reqLinks={requestObj.endpoints} 
-                    resultsLength={requestObj.resultsLength}
-                    cardType={requestObj.cardType}
-                />
-            ))}
-            <ActorsRow order={11}/>
-            <MoodRow/>
+        <Layout isShowcase>
+            <ContentWrapper>
+                {requestsObj.map((requestObj, index) => (
+                    <ResultsRow 
+                        key={`${requestObj}${index}`}
+                        title={requestObj.title} 
+                        reqLinks={requestObj.endpoints} 
+                        resultsLength={requestObj.resultsLength}
+                        cardType={requestObj.cardType}
+                    />
+                ))}
+                <ActorsRow order={11}/>
+                <MoodRow/>
+            </ContentWrapper>
         </Layout>
     )
 }

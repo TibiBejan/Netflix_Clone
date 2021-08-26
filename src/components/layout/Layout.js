@@ -1,14 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import styled from 'styled-components';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 
 const MainWrapper = styled.main`
     width: 100%;
-    display: grid;
-    grid-auto-columns: 100%;
-    grid-auto-rows: max-content;
-    padding-top: ${props => props.theme.padding.paddingMedium};
+    /* padding-top: 12.5rem; */
     padding-left: ${props => props.theme.padding.paddingMedium};
 
     @media ${props => props.theme.breakpoints.tabletLarge} {
@@ -20,16 +18,24 @@ const MainWrapper = styled.main`
     }
 `;
 
-function Layout({ children }) {
+function Layout({ children, isShowcase }) {
     return (
         <>
-            <Header />
+            <Header isShowcase={ isShowcase }/>
             <MainWrapper>
                 { children }    
             </MainWrapper>
-            <Footer />   
+            <Footer isShowcase={ isShowcase }/>   
         </>
     )
+}
+
+Layout.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]),
+    isShowcase: PropTypes.bool,
 }
 
 export default Layout;
