@@ -12,13 +12,13 @@ const ContentWrapper = styled.div`
     height: 100vh;
     min-height: 90rem;
     display: grid;
-    grid-template-columns: 1fr 70%;
+    grid-template-columns: 1fr 60%;
     column-gap: 10rem;
     padding-top: ${props => props.theme.padding.paddingLarge};
     padding-bottom: ${props => props.theme.padding.paddingSmall};
 `;
 
-function SeriesOrMovie() {
+function SeriesOrMovie({match}) {
     // STATE
     const [ details, setDetails ] = useState({});
     const [ isLoading, setIsLoading ] = useState(true);
@@ -60,8 +60,14 @@ function SeriesOrMovie() {
     return (
         <Layout>
             <ContentWrapper>
+                {/* {(details && !error) && (
+                    <>
+                        <Poster data={details}/>
+                        <Details data={details}/>
+                    </>
+                )} */}
                 <Poster data={details}/>
-                <Details data={details}/>
+                <Details data={details} match={match}/>
             </ContentWrapper>
         </Layout>
     )

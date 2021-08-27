@@ -14,30 +14,14 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path='/'>
-            <Homepage />
-          </Route>
-          <Route path='/register'>
-            <SignIn />
-          </Route>
-          <Route path='/login'>
-            <LogIn />
-          </Route>
-          <Route exact path='/series'>
-            <Series />
-          </Route>
-          <Route exact path='/movies'>
-            <Movies />
-          </Route>
-          <Route path='/kids'>
-            <Kids />
-          </Route>
-          <Route path='/discover'>
-            <Discover />
-          </Route>
-          <Route path='/browse/:name'>
-            <SeriesOrMovie />
-          </Route>
+          <Route exact path='/' component={Homepage} />
+          <Route path='/register' component={SignIn} />
+          <Route path='/login' component={LogIn} />
+          <Route path='/series' component={Series} />
+          <Route path='/movies' component={Movies} />
+          <Route path='/kids' component={Kids} />
+          <Route path='/discover' component={Discover} />
+          <Route path='/browse/:name' component={SeriesOrMovie} />
         </Switch>
       </Router>
     </div>

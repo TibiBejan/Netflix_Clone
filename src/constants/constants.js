@@ -1,5 +1,19 @@
 export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/';
 
+export const MOOVIE_NAVBAR_LINKS = [
+	{ id: 1, text: 'Overview' },
+	{ id: 2, text: 'Trailers & More', endpoint: 'trailers' },
+	{ id: 3, text: 'More Like This', endpoint: 'similar' },
+	{ id: 4, text: 'Details', endpoint: 'details' },
+]
+
+export const TV_NAVBAR_LINKS = [
+	{ id: 1, text: 'Overview' },
+	{ id: 2, text: 'Episodes', endpoint: 'episodes' },
+	{ id: 3, text: 'Trailers & More', endpoint: 'trailers' },
+	{ id: 4, text: 'More Like This', endpoint: 'similar' },
+]
+
 export const FOOTER_LINKS = [
     { id: 1, text: 'TV Series', path: '/series' },
     { id: 2, text: 'Movies', path: '/movies' },

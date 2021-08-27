@@ -12,8 +12,12 @@ const PosterWrapper = styled.div`
 `;
 
 const PosterImage = styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
     object-position: center top;
 `;
 
@@ -21,9 +25,9 @@ function Poster({ data }) {
     return (
         <PosterWrapper>
             <PosterImage 
-                src={data.poster_path 
-                    ? `${IMAGE_BASE_URL}original${data.poster_path}`
-                    : `${IMAGE_BASE_URL}original${data.backdrop_path}`
+                src={data.backdrop_path 
+                    ? `${IMAGE_BASE_URL}original${data.backdrop_path}`
+                    : `${IMAGE_BASE_URL}original${data.poster_path}`
                 }
                 alt={data.name ? data.name : data.title} 
             />
