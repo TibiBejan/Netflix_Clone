@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { IMAGE_BASE_URL } from '../../../constants/constants'
+import { IMAGE_BASE_URL } from '../../constants/constants'
 
 const PosterWrapper = styled.div`
     position: relative;
-    background-color: ${props => props.theme.colors.darkGray1};;
+    background-color: ${props => props.theme.colors.darkGray1};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,9 +25,9 @@ function Poster({ data }) {
     return (
         <PosterWrapper>
             <PosterImage 
-                src={data.backdrop_path 
-                    ? `${IMAGE_BASE_URL}original${data.backdrop_path}`
-                    : `${IMAGE_BASE_URL}original${data.poster_path}`
+                src={data.poster_path 
+                    ? `${IMAGE_BASE_URL}original${data.poster_path}`
+                    : `${IMAGE_BASE_URL}original${data.backdrop_path}`
                 }
                 alt={data.name ? data.name : data.title} 
             />
@@ -40,4 +40,3 @@ Poster.propTypes = {
 }
 
 export default Poster;
-

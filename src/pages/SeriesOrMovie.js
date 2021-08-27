@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import instance from '../api/Axios';
 import requests from '../api/Requests';
 import Layout from '../components/layout/Layout';
-import Poster from '../components/layout/SeriersOrMovie/Poster';
-import instance from '../api/Axios';
-import Details from '../components/layout/SeriersOrMovie/Details';
+import Poster from '../components/movieOrSeries/Poster';
+import Details from '../components/movieOrSeries/Details';
 
 const ContentWrapper = styled.div`
     width: 100%;
-    height: 100vh;
-    min-height: 90rem;
+    height: 110vh;
+    min-height: 100rem;
     display: grid;
-    grid-template-columns: 1fr 60%;
+    grid-template-columns: 1fr 65%;
     column-gap: 10rem;
     padding-top: ${props => props.theme.padding.paddingLarge};
     padding-bottom: ${props => props.theme.padding.paddingSmall};
 `;
 
-function SeriesOrMovie({match}) {
+function SeriesOrMovie() {
     // STATE
-    const [ details, setDetails ] = useState({});
+    const [ resData, setResData ] = useState({});
     const [ isLoading, setIsLoading ] = useState(true);
     const [ error, setError ] = useState('');
     // QUERY PARAMS
@@ -33,16 +33,32 @@ function SeriesOrMovie({match}) {
                 const { data } = await instance.get(requests.helpers.fetchMultiSearch.replace('{{query}}', queryParam));
                 const { media_type, id } = data.results[0];
                 if(media_type === 'tv') {
-                    const { data: tvData } = await instance.get(requests.tv.helpers.fetchTVDetails.replace('{{tv_id}}', id));
-                    !didCancel && setDetails({
+                    const [ details, videos, credits, recommendations ] = await Promise.all([
+                        instance.get(requests.tv.helpers.fetchTVDetails.replace('{{tv_id}}', id)),
+                        instance.get(requests.tv.helpers.fetchTVVideos.replace('{{tv_id}}', id)),
+                        instance.get(requests.tv.helpers.fetchTVAggregateCredits.replace('{{tv_id}}', id)),
+                        instance.get(requests.tv.helpers.fetchTVRecommendations.replace('{{tv_id}}', id)),
+                    ]);
+                    !didCancel && setResData({
                         media_type: media_type,
-                        ...tvData
+                        details: details.data,
+                        videos: videos.data,
+                        credits: credits.data,
+                        recommendations: recommendations.data.results
                     });
                 } else if(media_type === 'movie') {
-                    const { data: movieData } = await instance.get(requests.movies.helpers.fetchMovieDetails.replace('{{movie_id}}', id));
-                    !didCancel && setDetails({
+                    const [ details, videos, credits, recommendations ] = await Promise.all([
+                        instance.get(requests.movies.helpers.fetchMovieDetails.replace('{{movie_id}}', id)),
+                        instance.get(requests.movies.helpers.fetchMovieVideos.replace('{{movie_id}}', id)),
+                        instance.get(requests.movies.helpers.fetchMovieCredits.replace('{{movie_id}}', id)),
+                        instance.get(requests.movies.helpers.fetchMovieRecommendations.replace('{{movie_id}}', id)),
+                    ]);
+                    !didCancel && setResData({
                         media_type: media_type,    
-                        ...movieData
+                        details: details.data,
+                        videos: videos.data,
+                        credits: credits.data,
+                        recommendations: recommendations.data.results,
                     });
                 }
             }
@@ -57,17 +73,17 @@ function SeriesOrMovie({match}) {
         return () => didCancel = true;
     }, [queryParam]);
 
+    console.log(resData)
+
     return (
         <Layout>
             <ContentWrapper>
-                {/* {(details && !error) && (
+                {Object.keys(resData).length !== 0 && (
                     <>
-                        <Poster data={details}/>
-                        <Details data={details}/>
+                        <Poster data={resData.details}/>
+                        <Details data={resData}/>
                     </>
-                )} */}
-                <Poster data={details}/>
-                <Details data={details} match={match}/>
+                )}
             </ContentWrapper>
         </Layout>
     )
