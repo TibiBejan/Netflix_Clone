@@ -8,7 +8,7 @@ export const RowNavigationWrapper = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: flex-start;
+    align-items: ${props => props.cardType === 'centered' ? 'center' : 'flex-start'};
     justify-content: space-between;
     
     @media ${props => props.theme.breakpoints.tabletLarge} {
@@ -25,6 +25,8 @@ export const NavigationButton = styled.button`
                 return '60rem';
             case 'medium':
                 return '35rem';
+            case 'centered':
+                return '10rem';
             default:
                 return '25rem';
         }

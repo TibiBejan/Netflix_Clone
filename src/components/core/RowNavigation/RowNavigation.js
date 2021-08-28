@@ -7,7 +7,7 @@ const RowNavigation = React.forwardRef((props, ref) => {
     const { prevButton, nextButton } = ref;
 
     return (
-        <RowNavigationWrapper>
+        <RowNavigationWrapper cardType={props.cardType}>
             <NavigationButton ref={prevButton} visible={props.visible} cardType={props.cardType}>
                 <IconContext.Provider value={{color: '#fff', size: '32px'}}>
                     <FaChevronLeft />

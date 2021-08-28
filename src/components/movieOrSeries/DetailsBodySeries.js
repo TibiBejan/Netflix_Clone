@@ -4,13 +4,20 @@ import { TV_NAVBAR_LINKS } from '../../constants/constants';
 import { Label } from '../typography/Typography';
 import { StyledTabs, StyledTabsList, StyledTab, StyledTabPanel, TabPanelWrapper } from './DetailsBodyStyles';
 import DetailsOverview from './DetailsOverview/DetailsOverview';
+import DetailsEpisodes from './DetailsEpisodes/DetailsEpisodes';
+import DetailsTrailers from './DetailsTrailers/DetailsTrailers';
 import DetailsSimilar from './DetailsSimilar/DetailsSimilar';
-
 function DetailsBodySeries({ data }) {
 
     const similarData = {
         media_type: data.media_type,
         recommendations: data.recommendations
+    }
+
+    const trailersData = {
+        media_type: data.media_type,
+        videos: data.videos,
+        images: data.images
     }
 
     return (
@@ -38,10 +45,10 @@ function DetailsBodySeries({ data }) {
                         <DetailsOverview data={data}/>
                     </StyledTabPanel>
                     <StyledTabPanel>
-                        Episodes
+                        <DetailsEpisodes data={data.details}/>
                     </StyledTabPanel>
                     <StyledTabPanel>
-                        Trailers & More
+                        <DetailsTrailers data={trailersData}/>
                     </StyledTabPanel>
                     <StyledTabPanel>
                         <DetailsSimilar data={similarData}/>

@@ -5,12 +5,19 @@ import { Label } from '../typography/Typography';
 import DetailsOverview from './DetailsOverview/DetailsOverview';
 import { StyledTabs, StyledTabsList, StyledTab, StyledTabPanel, TabPanelWrapper } from './DetailsBodyStyles';
 import DetailsSimilar from './DetailsSimilar/DetailsSimilar';
+import DetailsTrailers from './DetailsTrailers/DetailsTrailers';
 
 function DetailsBodyMovie({ data }) {
 
     const similarData = {
         media_type: data.media_type,
         recommendations: data.recommendations
+    }
+
+    const trailersData = {
+        media_type: data.media_type,
+        videos: data.videos,
+        images: data.images
     }
 
     return (
@@ -41,7 +48,7 @@ function DetailsBodyMovie({ data }) {
                         Details
                     </StyledTabPanel>
                     <StyledTabPanel>
-                        Trailers & More
+                        <DetailsTrailers data={trailersData}/>
                     </StyledTabPanel>
                     <StyledTabPanel>
                         <DetailsSimilar data={similarData}/>

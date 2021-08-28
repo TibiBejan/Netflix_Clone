@@ -4,22 +4,23 @@ import instance from '../../../api/Axios';
 import requests from '../../../api/Requests';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import RowHeader from '../../core/RowHeader/RowHeader';
 import RowNavigation from '../../core/RowNavigation/RowNavigation';
-import SimilarCard from '../../core/SimilarCard/SimilarCard';
-import DetailsResultsSkeleton from '../../skeletons/DetailsResultsSkeleton';
-import { SimilarWrapper, ResultsWrapper } from './DetailsSimilarStyles';
+
+import { EpisodesWrapper, EpisodesHeader, SelectWrapper, SelectElement, EpisodesResults, PaginationWrapper } from './DetailsEpisodesStyles';
 
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.min.css"
+import EpisodeCard from '../../core/EpisodeCard/EpisodeCard';
 
 SwiperCore.use([Navigation, Pagination]);
 
-function DetailsSimilar({ data }) {
+function DetailsEpisodes({ data }) {
+
     // STATE
-    const [ results, setResults ] = useState([]);
-    const [ isLoading, setIsLoading ] = useState(true);
+    const [ seasonNumber, setSeasonNumber ] = useState(1);
+    const [ seasonData, setSeasonData ] = useState({});
+    const [ isLoading, setIsLoading ] = useState(false);
     const [ error, setError ] = useState('');
     const [ visible, setVisible ] = useState(false);
     // REF
@@ -28,22 +29,18 @@ function DetailsSimilar({ data }) {
         prevButton: useRef(null),
         nextButton: useRef(null),
     }
+    // HANDLE STATE
+    const handleSeasonNumber = (e) => {
+        setSeasonNumber(e.target.value);
+    }
     // EFFECT
     useEffect(() => {
         let didCancel = false;
-        const fetchRecommendations = async () => {
-            const promises = data.recommendations.map(el => {
-                if(data.media_type === 'movie') {
-                    return instance.get(requests.movies.helpers.fetchMovieDetails.replace('{{movie_id}}', el.id));
-                } else if(data.media_type === 'tv') {
-                    return instance.get(requests.tv.helpers.fetchTVDetails.replace('{{tv_id}}', el.id));
-                }
-                return 0;
-            });
-            try {
-                const fetchedResults = await Promise.all(promises);
-                const data = fetchedResults.map(result => result.data);
-                !didCancel && setResults(data);
+        const fetchSeasonData = async () => {
+            !didCancel && setIsLoading(true);
+            try{
+                const season = await instance.get(`/tv/${data.id}/season/${seasonNumber}?api_key=${process.env.REACT_APP_TMDB_KEY}`);
+                !didCancel && setSeasonData(season.data);
             }
             catch(err) {
                 setError(err.response ? err.response.statusText : err.message);
@@ -52,24 +49,31 @@ function DetailsSimilar({ data }) {
                 !didCancel && setIsLoading(false);
             }
         }
-        fetchRecommendations();
+        fetchSeasonData();
         return () => didCancel = true;
-    }, [data]);
+    }, [seasonNumber, data]);
 
     return (
-        <SimilarWrapper>
-            {isLoading && <DetailsResultsSkeleton />}
-            {error && <DetailsResultsSkeleton errorMessage="Oops! Something went wrong..." />}
-            {
-                (data.recommendations.length === 0 || results.length === 0) && (!error && !isLoading)
-                    && <DetailsResultsSkeleton errorMessage="Oops! There are no similar titles..." />
-            }
-            {results.length !== 0 && (
+        <EpisodesWrapper>
+            <EpisodesHeader>
+                <SelectWrapper value={seasonNumber} onChange={handleSeasonNumber}>
+                    {
+                        data.seasons.map(season => (
+                            <SelectElement 
+                                value={season.season_number} 
+                                key={season.id}
+                            >
+                                {season.name}
+                            </SelectElement>
+                        ))
+                    }
+                </SelectWrapper>
+            </EpisodesHeader>
+            {Object.keys(seasonData).length !== 0 && (
                 <>
-                    <RowHeader title='Similar Titles' ref={paginationRef}/>
-                    <ResultsWrapper 
-                        onMouseEnter={() => setVisible(prevState => !prevState)}
-                        onMouseLeave={() => setVisible(prevState => !prevState)}
+                    <EpisodesResults
+                        onMouseEnter={() => setVisible(true)}
+                        onMouseLeave={() => setVisible(false)}
                     >
                         <RowNavigation ref={rowNavigationRef} visible={visible} cardType="max-height"/>
                         <Swiper
@@ -104,24 +108,23 @@ function DetailsSimilar({ data }) {
                             resistanceRatio={0.5}
                         >
                             {
-                                results.map(result => (
-                                    <SwiperSlide key={result.id}>
-                                        <SimilarCard data={result}/>
+                                seasonData.episodes.map(episode => (
+                                    <SwiperSlide key={episode.id}>
+                                        <EpisodeCard data={episode}/>
                                     </SwiperSlide>
                                 ))
                             }
                         </Swiper>
-                    </ResultsWrapper>
+                    </EpisodesResults>
+                    <PaginationWrapper ref={paginationRef}/>
                 </>
             )}
-        </SimilarWrapper>
+        </EpisodesWrapper>
     )
 }
 
-DetailsSimilar.propTypes = { 
-    data: PropTypes.object
+DetailsEpisodes.propTypes = {
+    data: PropTypes.object,
 }
 
-export default DetailsSimilar
-
-
+export default DetailsEpisodes;

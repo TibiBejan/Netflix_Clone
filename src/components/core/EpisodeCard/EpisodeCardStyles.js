@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { HeadingThree, Label, Paragraph } from "../../typography/Typography";
 
-export const SimilarCardWrapper = styled.div`
+export const EpisodeCardWrapper = styled.div`
     height: 100%;
     display: flex;
     flex-flow: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     border-radius: 0.5rem;
     background-color: ${props => props.theme.colors.darkGray1};
     overflow: hidden;
@@ -43,13 +43,6 @@ export const CardShowcase = styled.div`
     }
 `;
 
-export const ShowcaseMeta = styled.div`
-    position: absolute;
-    top: ${props => props.theme.padding.paddingMobile};
-    right: ${props => props.theme.padding.paddingMobile};
-    z-index: 150;
-`;
-
 export const CardContent = styled.div`
     height: calc(100% - 25rem);
     width: 100%;
@@ -57,9 +50,10 @@ export const CardContent = styled.div`
     flex-flow: column;
     align-items: flex-start;
     justify-content: space-between;
-    row-gap: 2.5rem;
+    row-gap: 1.5rem;
     padding: ${props => props.theme.padding.paddingSmall};
 `;
+
 
 export const CardContentHeader = styled.div`
     width: 100%;
@@ -71,29 +65,21 @@ export const CardContentHeader = styled.div`
 `;
 
 export const LabelsWrapper = styled.div`
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    row-gap: 1rem;
-`;
-
-export const StyledButton = styled.button`
+    width: 100%;
     display: flex;
     flex-flow: row;
     align-items: center;
-    justify-content: center;
-    column-gap: 0.5rem;
-    padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
-    background-color: ${props => props.theme.colors.red};
-    transition: 0.35s cubic-bezier(0.39, 0.575, 0.565, 1);
+    justify-content: space-between;
+`;
+
+export const RatingWrapper = styled.div`
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
 
     ${Label} {
-        cursor: inherit;
-    }
-
-    &:hover {
-        background-color: ${props => props.theme.colors.darkRed};
+        margin-right: 1rem;
     }
 `;
 
@@ -102,12 +88,12 @@ export const CardContentBody = styled.div`
     width: 100%;
     display: flex;
     flex-flow: column;
-    row-gap: 2.5rem;
+    row-gap: 1.5rem;
     overflow: hidden;
 
     ${HeadingThree} {
-        white-space: nowrap;
         text-overflow: ellipsis;
+        white-space: nowrap;
     }
 `;
 

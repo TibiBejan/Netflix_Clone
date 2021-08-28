@@ -33,9 +33,10 @@ function SeriesOrMovie() {
                 const { data } = await instance.get(requests.helpers.fetchMultiSearch.replace('{{query}}', queryParam));
                 const { media_type, id } = data.results[0];
                 if(media_type === 'tv') {
-                    const [ details, videos, credits, recommendations ] = await Promise.all([
+                    const [ details, videos, images, credits, recommendations ] = await Promise.all([
                         instance.get(requests.tv.helpers.fetchTVDetails.replace('{{tv_id}}', id)),
                         instance.get(requests.tv.helpers.fetchTVVideos.replace('{{tv_id}}', id)),
+                        instance.get(requests.tv.helpers.fetchTVImages.replace('{{tv_id}}', id)),
                         instance.get(requests.tv.helpers.fetchTVAggregateCredits.replace('{{tv_id}}', id)),
                         instance.get(requests.tv.helpers.fetchTVRecommendations.replace('{{tv_id}}', id)),
                     ]);
@@ -43,13 +44,15 @@ function SeriesOrMovie() {
                         media_type: media_type,
                         details: details.data,
                         videos: videos.data,
+                        images: images.data,
                         credits: credits.data,
                         recommendations: recommendations.data.results
                     });
                 } else if(media_type === 'movie') {
-                    const [ details, videos, credits, recommendations ] = await Promise.all([
+                    const [ details, videos, images, credits, recommendations ] = await Promise.all([
                         instance.get(requests.movies.helpers.fetchMovieDetails.replace('{{movie_id}}', id)),
                         instance.get(requests.movies.helpers.fetchMovieVideos.replace('{{movie_id}}', id)),
+                        instance.get(requests.movies.helpers.fetchMovieImages.replace('{{movie_id}}', id)),
                         instance.get(requests.movies.helpers.fetchMovieCredits.replace('{{movie_id}}', id)),
                         instance.get(requests.movies.helpers.fetchMovieRecommendations.replace('{{movie_id}}', id)),
                     ]);
@@ -57,6 +60,7 @@ function SeriesOrMovie() {
                         media_type: media_type,    
                         details: details.data,
                         videos: videos.data,
+                        images: images.data,
                         credits: credits.data,
                         recommendations: recommendations.data.results,
                     });

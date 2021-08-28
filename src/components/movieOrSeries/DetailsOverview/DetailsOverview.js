@@ -62,7 +62,7 @@ function DetailsOverview({ data }) {
                 {data.recommendations.length === 0 && <DetailsResultsSkeleton errorMessage="Oops! There are no similar titles..." />}
                 {data.recommendations.length !== 0 && (
                     <>
-                        <RowHeader title='Related Movies' ref={paginationRef}/>
+                        <RowHeader title='Related Titles' ref={paginationRef}/>
                         <ResultsWrapper 
                             onMouseEnter={() => setVisible(prevState => !prevState)}
                             onMouseLeave={() => setVisible(prevState => !prevState)}
