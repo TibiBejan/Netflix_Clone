@@ -4,10 +4,14 @@ import { TV_NAVBAR_LINKS } from '../../constants/constants';
 import { Label } from '../typography/Typography';
 import { StyledTabs, StyledTabsList, StyledTab, StyledTabPanel, TabPanelWrapper } from './DetailsBodyStyles';
 import DetailsOverview from './DetailsOverview/DetailsOverview';
+import DetailsSimilar from './DetailsSimilar/DetailsSimilar';
 
 function DetailsBodySeries({ data }) {
 
-    console.log(data);
+    const similarData = {
+        media_type: data.media_type,
+        recommendations: data.recommendations
+    }
 
     return (
         <>
@@ -40,7 +44,7 @@ function DetailsBodySeries({ data }) {
                         Trailers & More
                     </StyledTabPanel>
                     <StyledTabPanel>
-                        More Like This
+                        <DetailsSimilar data={similarData}/>
                     </StyledTabPanel>
                 </TabPanelWrapper>
 

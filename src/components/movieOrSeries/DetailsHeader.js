@@ -2,21 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { BsFillStarFill } from 'react-icons/bs';
+import setMovieDuration from '../../utils/MovieDurationUtil';
+import setSeasonsLength from '../../utils/SeasonsLengthUtil';
 import { HeadingOne, Label } from '../typography/Typography';
 import { DetailsHeaderWrapper, HeaderTitle, RatingWrapper, HeaderLabels, LabelWrapper } from './DetailsHeaderStyles';
 
 function DetailsHeader({ data }) {
-
-    const setMovieDuration = (min) => {
-        const hours = Math.floor(min / 60);
-        const minutes = min % 60;
-        return `${hours}h ${minutes}min`;
-    }
-
-    const setNumberOfSeasons = (seasons) => {
-        return seasons > 1 ? `${seasons} Seasons` : `${seasons} Season`
-    } 
-
     return (
         <DetailsHeaderWrapper>
             <HeaderTitle>
@@ -43,7 +34,7 @@ function DetailsHeader({ data }) {
                         {
                             data.media_type === 'movie' 
                                 ? setMovieDuration(data.details.runtime)
-                                : setNumberOfSeasons(data.details.number_of_seasons)
+                                : setSeasonsLength(data.details.number_of_seasons)
                         }
                     </Label>
                 </LabelWrapper>

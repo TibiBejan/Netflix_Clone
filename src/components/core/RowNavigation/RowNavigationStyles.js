@@ -19,6 +19,8 @@ export const RowNavigationWrapper = styled.div`
 export const NavigationButton = styled.button`
     height: ${props => {
         switch(props.cardType) {
+            case 'max-height': 
+                return '100%';
             case 'tall':
                 return '60rem';
             case 'medium':

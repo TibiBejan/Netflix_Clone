@@ -73,8 +73,6 @@ function SeriesOrMovie() {
         return () => didCancel = true;
     }, [queryParam]);
 
-    console.log(resData)
-
     return (
         <Layout>
             <ContentWrapper>

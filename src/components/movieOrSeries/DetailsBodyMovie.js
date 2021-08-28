@@ -4,10 +4,14 @@ import { MOOVIE_NAVBAR_LINKS } from '../../constants/constants';
 import { Label } from '../typography/Typography';
 import DetailsOverview from './DetailsOverview/DetailsOverview';
 import { StyledTabs, StyledTabsList, StyledTab, StyledTabPanel, TabPanelWrapper } from './DetailsBodyStyles';
+import DetailsSimilar from './DetailsSimilar/DetailsSimilar';
 
 function DetailsBodyMovie({ data }) {
 
-    console.log(data);
+    const similarData = {
+        media_type: data.media_type,
+        recommendations: data.recommendations
+    }
 
     return (
         <>
@@ -40,7 +44,7 @@ function DetailsBodyMovie({ data }) {
                         Trailers & More
                     </StyledTabPanel>
                     <StyledTabPanel>
-                        More Like This
+                        <DetailsSimilar data={similarData}/>
                     </StyledTabPanel>
                 </TabPanelWrapper>
 

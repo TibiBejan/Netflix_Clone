@@ -39,6 +39,7 @@ export const OverviewRow = styled.div`
 
 export const RelatedResults = styled.div`
     width: 100%;
+    height: 35rem;
     display: flex;
     flex-flow: column;
     overflow: hidden;
