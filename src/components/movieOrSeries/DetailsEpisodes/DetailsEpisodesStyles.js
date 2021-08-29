@@ -21,14 +21,35 @@ export const EpisodesHeader = styled.div`
 
 export const SelectWrapper = styled.select`
     width: 100%;
-    max-width: 20%;
+    margin-bottom: ${props => props.theme.margin.marginSmall};
+    padding: 1rem;
+    background-color: transparent;
+    border: 0.15rem solid ${props => props.theme.colors.darkGray3};
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15rem;
+    color: ${props => props.theme.colors.lightGray1};
+    text-transform: uppercase;
+    cursor: pointer;
+    
+    &::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
 `;
 
 export const SelectElement = styled.option`
+    width: 100%;
     display: flex;
     flex-flow: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    margin: 1.5rem 0;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15rem;
+    color: ${props => props.theme.colors.lightGray1};
+    background-color: ${props => props.theme.colors.black};
+    text-transform: uppercase;
 `;
 
 export const EpisodesResults = styled.div`

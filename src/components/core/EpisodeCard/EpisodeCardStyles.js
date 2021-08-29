@@ -43,6 +43,15 @@ export const CardShowcase = styled.div`
     }
 `;
 
+export const CardLogoWrapper = styled.div`
+    width: 50%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+`;
+
 export const CardContent = styled.div`
     height: calc(100% - 25rem);
     width: 100%;
@@ -54,6 +63,19 @@ export const CardContent = styled.div`
     padding: ${props => props.theme.padding.paddingSmall};
 `;
 
+export const CardContentPreview = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 2.5rem;
+
+    ${HeadingThree} {
+        text-align: center;
+    }
+`;
 
 export const CardContentHeader = styled.div`
     width: 100%;

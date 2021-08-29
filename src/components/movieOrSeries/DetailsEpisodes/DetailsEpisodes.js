@@ -61,10 +61,9 @@ function DetailsEpisodes({ data }) {
                         data.seasons.map(season => (
                             <SelectElement 
                                 value={season.season_number} 
+                                label={season.name}
                                 key={season.id}
-                            >
-                                {season.name}
-                            </SelectElement>
+                            />
                         ))
                     }
                 </SelectWrapper>
@@ -75,7 +74,7 @@ function DetailsEpisodes({ data }) {
                         onMouseEnter={() => setVisible(true)}
                         onMouseLeave={() => setVisible(false)}
                     >
-                        <RowNavigation ref={rowNavigationRef} visible={visible} cardType="max-height"/>
+                        <RowNavigation ref={rowNavigationRef} visible={visible} cardType="centered"/>
                         <Swiper
                             spaceBetween={20}
                             slidesPerView={2}
@@ -101,6 +100,7 @@ function DetailsEpisodes({ data }) {
                             pagination={{
                                 el: paginationRef.current,
                                 type: 'bullets',
+                                // "dynamicBullets": true,
                                 clickable: true,
                             }}
                             grabCursor={true}

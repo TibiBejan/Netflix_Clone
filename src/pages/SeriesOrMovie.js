@@ -46,7 +46,7 @@ function SeriesOrMovie() {
                         videos: videos.data,
                         images: images.data,
                         credits: credits.data,
-                        recommendations: recommendations.data.results
+                        recommendations: recommendations.data.results,
                     });
                 } else if(media_type === 'movie') {
                     const [ details, videos, images, credits, recommendations ] = await Promise.all([
