@@ -15,6 +15,10 @@ export const OverviewWrapper = styled.div`
         display: -webkit-box;
         -webkit-line-clamp: 4; /* number of lines to show */
         -webkit-box-orient: vertical;
+
+        @media ${props => props.theme.breakpoints.utilityDesktop} {
+            margin-bottom: ${props => props.theme.margin.marginSmall};
+        }
     }
 `;
 

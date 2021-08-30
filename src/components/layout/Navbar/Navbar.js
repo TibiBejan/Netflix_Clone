@@ -17,7 +17,7 @@ export const NavbarWrapper = styled.nav`
     margin: 0 auto;
     padding: 0 ${props => props.theme.padding.paddingMedium};
     transition: all 0.35s ease-in-out;
-    z-index: 150;
+    z-index: 250;
 
     ${props => props.sticky && css`
         height: 9rem;

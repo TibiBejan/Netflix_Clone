@@ -37,6 +37,10 @@ export const StyledTabsList = styled(TabList)`
         height: 0.15rem;
         background-color: ${props => props.theme.colors.darkGray3};
     }
+
+    @media ${props => props.theme.breakpoints.utilityDesktop} {
+        margin-bottom: ${props => props.theme.margin.marginMedium};
+    }
 `;
 
 StyledTabsList.tabsRole = 'TabList';

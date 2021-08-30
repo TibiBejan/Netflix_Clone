@@ -3,21 +3,26 @@ import PropTypes from 'prop-types'
 import { MOOVIE_NAVBAR_LINKS } from '../../constants/constants';
 import { Label } from '../typography/Typography';
 import DetailsOverview from './DetailsOverview/DetailsOverview';
-import { StyledTabs, StyledTabsList, StyledTab, StyledTabPanel, TabPanelWrapper } from './DetailsBodyStyles';
-import DetailsSimilar from './DetailsSimilar/DetailsSimilar';
+import DetailsInfo from './DetailsInfo/DetailsInfo';
 import DetailsTrailers from './DetailsTrailers/DetailsTrailers';
-
+import DetailsSimilar from './DetailsSimilar/DetailsSimilar';
+import { StyledTabs, StyledTabsList, StyledTab, StyledTabPanel, TabPanelWrapper } from './DetailsBodyStyles';
 function DetailsBodyMovie({ data }) {
 
-    const similarData = {
-        media_type: data.media_type,
-        recommendations: data.recommendations
+    const infoData = {
+        details: data.details,
+        reviews: data.reviews
     }
 
     const trailersData = {
         media_type: data.media_type,
         videos: data.videos,
         images: data.images
+    }
+
+    const similarData = {
+        media_type: data.media_type,
+        recommendations: data.recommendations
     }
 
     return (
@@ -45,7 +50,7 @@ function DetailsBodyMovie({ data }) {
                         <DetailsOverview data={data}/>
                     </StyledTabPanel>
                     <StyledTabPanel>
-                        Details
+                        <DetailsInfo data={infoData}/>
                     </StyledTabPanel>
                     <StyledTabPanel>
                         <DetailsTrailers data={trailersData}/>

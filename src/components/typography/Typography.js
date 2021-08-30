@@ -90,6 +90,8 @@ export const Paragraph = styled.p`
                 return '2rem';
             case 'medium':
                 return '1.6rem';
+            case 'small':
+                return '1.4rem';
             default:
                 return '1.6rem'
         }
@@ -142,6 +144,8 @@ export const Paragraph = styled.p`
                 return '1.6rem';
             case 'medium':
                 return '1.2rem';
+            case 'small':
+                return '1rem';
             default:
                 return '1.2rem'
         }

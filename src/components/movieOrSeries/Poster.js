@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { IMAGE_BASE_URL } from '../../constants/constants'
+import useWindowSize from '../../hooks/useWindowSize';
 
 const PosterWrapper = styled.div`
     position: relative;
@@ -9,6 +10,18 @@ const PosterWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media ${props => props.theme.breakpoints.utilityDesktop} {
+        width: calc(100% - ${props => props.theme.padding.paddingMedium});
+    }
+
+    @media ${props => props.theme.breakpoints.tabletLarge} {
+        width: calc(100% - ${props => props.theme.padding.paddingSmall});
+    }
+
+    @media ${props => props.theme.breakpoints.phoneLarge} {
+        width: calc(100% - ${props => props.theme.padding.paddingMobile});
+    }
 `;
 
 const PosterImage = styled.img`
@@ -22,12 +35,20 @@ const PosterImage = styled.img`
 `;
 
 function Poster({ data }) {
+
+    const { width: windowWidth } = useWindowSize();
+
     return (
         <PosterWrapper>
             <PosterImage 
-                src={data.poster_path 
-                    ? `${IMAGE_BASE_URL}original${data.poster_path}`
-                    : `${IMAGE_BASE_URL}original${data.backdrop_path}`
+                src={
+                    windowWidth >= 1500
+                        ? data.poster_path 
+                            ? `${IMAGE_BASE_URL}original${data.poster_path}`
+                            : `${IMAGE_BASE_URL}original${data.backdrop_path}`
+                        : data.backdrop_path 
+                            ? `${IMAGE_BASE_URL}original${data.backdrop_path}`
+                            : `${IMAGE_BASE_URL}original${data.poster_path}`
                 }
                 alt={data.name ? data.name : data.title} 
             />

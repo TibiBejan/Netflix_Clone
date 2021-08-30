@@ -16,6 +16,14 @@ const ContentWrapper = styled.div`
     column-gap: 10rem;
     padding-top: ${props => props.theme.padding.paddingLarge};
     padding-bottom: ${props => props.theme.padding.paddingSmall};
+
+    @media ${props => props.theme.breakpoints.utilityDesktop} {
+        height: auto;
+        min-height: max-content;
+        grid-template-columns: 1fr;
+        grid-template-rows: 70rem minmax(90rem, 1fr);
+        row-gap: 5rem;
+    }
 `;
 
 function SeriesOrMovie() {
@@ -49,12 +57,13 @@ function SeriesOrMovie() {
                         recommendations: recommendations.data.results,
                     });
                 } else if(media_type === 'movie') {
-                    const [ details, videos, images, credits, recommendations ] = await Promise.all([
+                    const [ details, videos, images, credits, recommendations, reviews ] = await Promise.all([
                         instance.get(requests.movies.helpers.fetchMovieDetails.replace('{{movie_id}}', id)),
                         instance.get(requests.movies.helpers.fetchMovieVideos.replace('{{movie_id}}', id)),
                         instance.get(requests.movies.helpers.fetchMovieImages.replace('{{movie_id}}', id)),
                         instance.get(requests.movies.helpers.fetchMovieCredits.replace('{{movie_id}}', id)),
                         instance.get(requests.movies.helpers.fetchMovieRecommendations.replace('{{movie_id}}', id)),
+                        instance.get(requests.movies.helpers.fetchMovieReviews.replace('{{movie_id}}', id)),
                     ]);
                     !didCancel && setResData({
                         media_type: media_type,    
@@ -63,6 +72,7 @@ function SeriesOrMovie() {
                         images: images.data,
                         credits: credits.data,
                         recommendations: recommendations.data.results,
+                        reviews: reviews.data.results,
                     });
                 }
             }

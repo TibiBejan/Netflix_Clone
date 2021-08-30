@@ -202,6 +202,7 @@ const requests = {
 			fetchMovieDetails: `/movie/{{movie_id}}?api_key=${API_KEY}`,
 			fetchMovieRecommendations: `/movie/{{movie_id}}/recommendations?api_key=${API_KEY}`,
 			fetchMovieCredits: `/movie/{{movie_id}}/credits?api_key=${API_KEY}`,
+			fetchMovieReviews: `/movie/{{movie_id}}/reviews?api_key=${API_KEY}`,
 			fetchMovieByCast: `/discover/movie?api_key=${API_KEY}&with_cast={{actor-id}}`
         },
     },

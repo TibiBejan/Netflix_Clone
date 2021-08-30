@@ -71,7 +71,7 @@ function DetailsSimilar({ data }) {
                         onMouseEnter={() => setVisible(prevState => !prevState)}
                         onMouseLeave={() => setVisible(prevState => !prevState)}
                     >
-                        <RowNavigation ref={rowNavigationRef} visible={visible} cardType="max-height"/>
+                        <RowNavigation ref={rowNavigationRef} visible={visible} cardType="centered"/>
                         <Swiper
                             spaceBetween={20}
                             slidesPerView={2}
