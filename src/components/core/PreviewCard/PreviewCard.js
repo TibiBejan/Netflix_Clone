@@ -11,7 +11,7 @@ function PreviewCard({ data, scrollPosition, cardType }) {
     const [hoverRef, isHovered] = useHover();
 
     return (
-        <Link to={`/browse/${data.name ? data.name : data.title}`}>
+        <Link to={`/browse/${data.name ? encodeURIComponent(data.name) : encodeURIComponent(data.title)}`}>
             <ResultCard ref={hoverRef}>
                 <ResultCardShowcase isHovered={isHovered} cardType={cardType}>
                     <LazyLoadImage 

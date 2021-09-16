@@ -20,7 +20,7 @@ function Homepage() {
         return requests.movies.categories.reduce((acc, obj) => {
             if(tvCategory.title === obj.title) {
                 acc.title = obj.title;
-                acc.endpoints = [tvCategory.endpoint, obj.endpoint];
+                acc.endpoints = [tvCategory.endpoint, obj.endpoint].flat();
                 acc.cardType = obj.cardType ? obj.cardType : 'wide';
                 acc.resultsLength = obj.resultsLength ? obj.resultsLength : 40;
             }
@@ -34,7 +34,10 @@ function Homepage() {
     }).filter(request => request.endpoints !== null);
 
     return (
-        <Layout isShowcase>
+        <Layout 
+            heroType="series"
+            isShowcase
+        >
             <ContentWrapper>
                 {requestsObj.map((requestObj, index) => (
                     <ResultsRow 

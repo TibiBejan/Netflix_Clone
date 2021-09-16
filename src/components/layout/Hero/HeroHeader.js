@@ -90,18 +90,33 @@ function HeroHeader({ data }) {
 
             <InfoWrapper>
                 <InfoWrapperItem>
-                    <Label uppercase='uppercase' weight='bold'>{data.first_air_date.split('-')[0]}</Label>
-                </InfoWrapperItem>
-                <InfoWrapperItem>
-                    <Label uppercase='uppercase' weight='bold'>Director:
-                        <Label weight='bold' color='darkGray3' shadow>&nbsp;&nbsp;{data.networks[0].name}</Label>
+                    <Label uppercase='uppercase' weight='bold'>
+                      {
+                        data.heroType === "movies" 
+                          ? data.release_date.split('-')[0]
+                          : data.first_air_date.split('-')[0]
+                      }
                     </Label>
                 </InfoWrapperItem>
                 <InfoWrapperItem>
-                    <Label uppercase='uppercase' weight='bold'>Seasons:
-                        <Label weight='bold' color='darkGray3' shadow>
-                            &nbsp;&nbsp;{data.number_of_seasons}
-                            &nbsp;({data.number_of_episodes} Episodes)
+                    <Label uppercase='uppercase' weight='bold'>Director:
+                        <Label weight='bold' color='darkGray3' shadow>&nbsp;&nbsp;
+                          {
+                            data.heroType === "movies" 
+                              ? data.production_companies[0].name
+                              : data.networks[0].name
+                          }
+                        </Label>
+                    </Label>
+                </InfoWrapperItem>
+                <InfoWrapperItem>
+                    <Label uppercase='uppercase' weight='bold'>{data.heroType === "movies" ? "Duration:" : "Seasons:"}
+                        <Label weight='bold' color='darkGray3' shadow>&nbsp;&nbsp;
+                          {
+                            data.heroType === "movies" 
+                              ? `${data.runtime} Minutes`
+                              : `${data.number_of_seasons} - ${data.number_of_episodes} Episodes`
+                          }
                         </Label>
                     </Label>
                 </InfoWrapperItem>

@@ -18,10 +18,10 @@ const MainWrapper = styled.main`
     }
 `;
 
-function Layout({ children, isShowcase }) {
+function Layout({ children, heroType, isShowcase }) {
     return (
         <>
-            <Header isShowcase={ isShowcase }/>
+            <Header heroType={ heroType } isShowcase={ isShowcase }/>
             <MainWrapper>
                 { children }    
             </MainWrapper>

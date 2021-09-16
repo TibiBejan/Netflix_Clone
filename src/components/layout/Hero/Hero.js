@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import instance from '../../../api/Axios';
+import React from 'react';
+import PropTypes from 'prop-types'
 import requests from '../../../api/Requests';
 
 import Background from './Background';
@@ -10,41 +10,7 @@ import HeroSkeleton from '../../skeletons/HeroSkeleton';
 import { HeroWrapper, HeroContentWrapper, HeroContentInner, ContentWrapper } from './HeroStyles';
 import ResultsRow from '../ResultsRow/ResultsRow';
 
-function Hero() {
-    const generateRandomNumber = (length) => {
-         return Math.floor(Math.random() * length);
-    }
-
-    const [ result, setResult ] = useState({});
-    const [ isLoading, setIsLoading ] = useState(true);
-    const [ error, setError ] = useState('');
-    
-    useEffect(() => {
-        let didCancel = false;
-        const fetchHeroDetails = async () => {
-            instance.get(requests.tv.helpers.fetchNetflixOriginals).then(response => {
-                let randomNetflixOriginal;
-                if(response.status === 200) {
-                    const responseLength = response.data.results.length;
-                    randomNetflixOriginal = response.data.results[generateRandomNumber(responseLength)];
-                }
-                return instance.get(requests.tv.helpers.fetchTVDetails.replace('{{tv_id}}', randomNetflixOriginal.id));
-            }).then(response => {
-                if(response.status === 200) {
-                    !didCancel && setResult(response.data);
-                }
-            }).catch(err => {
-                setError(err.response ? err.response.statusText : err.message);
-            }).finally(() => {
-                !didCancel && setIsLoading(false);
-            })
-        }
-        fetchHeroDetails();
-        return () => {
-            didCancel = true;
-        }
-    }, []);
-
+function Hero({ data, isLoading, error }) {
     return (
         <>
             {isLoading && <HeroSkeleton /> }
@@ -52,24 +18,31 @@ function Hero() {
             {(!isLoading && !error) && (
                 <HeroWrapper>
                     <Background 
-                        backdrop_path={ result.backdrop_path } 
-                        poster_path={ result.poster_path } 
-                        title={ result.name }
+                        backdrop_path={ data.backdrop_path } 
+                        poster_path={ data.poster_path } 
+                        title={ data.name }
                     />
                     <HeroContentWrapper>
                         <HeroContentInner>
                             <ContentWrapper>
-                                <HeroHeader data={result}/>
-                                <HeroContent data={result}/>
+                                <HeroHeader data={data}/>
+                                <HeroContent data={data}/>
                             </ContentWrapper>
                         </HeroContentInner>
 
                         <ResultsRow 
                             title="Recommandations" 
-                            reqLinks={[
-                                requests.tv.helpers.fetchTVRecommendations.replace('{{tv_id}}', result.id),
-                                requests.tv.helpers.fetchNetflixOriginals
-                            ]}
+                            reqLinks={
+                                data.heroType === 'movies'
+                                    ? [
+                                        requests.movies.helpers.fetchMovieRecommendations.replace('{{movie_id}}', data.id),
+                                        requests.movies.helpers.fetchNetflixOriginals
+                                    ]
+                                    : [
+                                        requests.tv.helpers.fetchTVRecommendations.replace('{{tv_id}}', data.id),
+                                        requests.tv.helpers.fetchNetflixOriginals
+                                    ]
+                            }
                             resultsLength={15}
                             noMargin
                         /> 
@@ -78,6 +51,13 @@ function Hero() {
             )}
         </>
     )
+}
+
+Hero.propTypes = {
+    data: PropTypes.object,
+    isLoading: PropTypes.bool,
+    error: PropTypes.string,
+    heroType: PropTypes.string
 }
 
 export default Hero;
